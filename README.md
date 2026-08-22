@@ -1,4 +1,4 @@
-📚 AI Study Assistant
+📚 AI Study Assistant (Website:- https://ai-study-assistant-17.streamlit.app/)
 
 An adaptive, AI-powered study planner built with Streamlit. It generates a personalized study schedule from your subjects and available time, ranks subjects by urgency using a weighted priority algorithm, lets you reschedule the plan conversationally when things change, and can push your finalized study sessions straight to Google Calendar.
 
