@@ -1,47 +1,102 @@
-# # # # # # # # import streamlit as st
+# # # # # # # # # import streamlit as st
 
-# # # # # # # # st.set_page_config(
-# # # # # # # #     page_title="AI Study Assistant",
-# # # # # # # #     page_icon="📚"
-# # # # # # # # )
+# # # # # # # # # st.set_page_config(
+# # # # # # # # #     page_title="AI Study Assistant",
+# # # # # # # # #     page_icon="📚"
+# # # # # # # # # )
 
-# # # # # # # # st.title("📚 AI Study Assistant")
-# # # # # # # # st.write("Your personal AI-powered study planner")
+# # # # # # # # # st.title("📚 AI Study Assistant")
+# # # # # # # # # st.write("Your personal AI-powered study planner")
 
-# # # # # # # # st.header("Student Information")
+# # # # # # # # # st.header("Student Information")
 
-# # # # # # # # name = st.text_input("Your Name")
+# # # # # # # # # name = st.text_input("Your Name")
 
-# # # # # # # # subjects = st.text_input(
-# # # # # # # #     "Subjects",
-# # # # # # # #     placeholder="DSA, Java, Maths"
-# # # # # # # # )
+# # # # # # # # # subjects = st.text_input(
+# # # # # # # # #     "Subjects",
+# # # # # # # # #     placeholder="DSA, Java, Maths"
+# # # # # # # # # )
 
-# # # # # # # # hours = st.number_input(
-# # # # # # # #     "Available study hours today",
-# # # # # # # #     min_value=1,
-# # # # # # # #     max_value=12,
-# # # # # # # #     value=3
-# # # # # # # # )
+# # # # # # # # # hours = st.number_input(
+# # # # # # # # #     "Available study hours today",
+# # # # # # # # #     min_value=1,
+# # # # # # # # #     max_value=12,
+# # # # # # # # #     value=3
+# # # # # # # # # )
 
-# # # # # # # # if st.button("Generate Study Plan"):
+# # # # # # # # # if st.button("Generate Study Plan"):
 
-# # # # # # # #     if name and subjects:
+# # # # # # # # #     if name and subjects:
 
-# # # # # # # #         st.success("Study plan will be generated!")
+# # # # # # # # #         st.success("Study plan will be generated!")
 
-# # # # # # # #         st.write("### 📅 Your Information")
-# # # # # # # #         st.write(f"**Name:** {name}")
-# # # # # # # #         st.write(f"**Subjects:** {subjects}")
-# # # # # # # #         st.write(f"**Available Hours:** {hours}")
+# # # # # # # # #         st.write("### 📅 Your Information")
+# # # # # # # # #         st.write(f"**Name:** {name}")
+# # # # # # # # #         st.write(f"**Subjects:** {subjects}")
+# # # # # # # # #         st.write(f"**Available Hours:** {hours}")
 
-# # # # # # # #     else:
-# # # # # # # #         st.warning("Please enter your name and subjects.")
+# # # # # # # # #     else:
+# # # # # # # # #         st.warning("Please enter your name and subjects.")
+
+
+
+# # # # # # # # # import streamlit as st
+# # # # # # # # # from agent import generate_study_plan
+
+
+# # # # # # # # # st.set_page_config(
+# # # # # # # # #     page_title="AI Study Assistant",
+# # # # # # # # #     page_icon="📚"
+# # # # # # # # # )
+
+# # # # # # # # # st.title("📚 AI Study Assistant")
+# # # # # # # # # st.write("Your personal AI-powered study planner")
+
+# # # # # # # # # st.header("Student Information")
+
+# # # # # # # # # name = st.text_input("Your Name")
+
+# # # # # # # # # subjects = st.text_input(
+# # # # # # # # #     "Subjects",
+# # # # # # # # #     placeholder="DSA, Java, Maths"
+# # # # # # # # # )
+
+# # # # # # # # # hours = st.number_input(
+# # # # # # # # #     "Available study hours today",
+# # # # # # # # #     min_value=1,
+# # # # # # # # #     max_value=12,
+# # # # # # # # #     value=3
+# # # # # # # # # )
+
+# # # # # # # # # if st.button("Generate Study Plan"):
+
+# # # # # # # # #     if name and subjects:
+
+# # # # # # # # #         with st.spinner("🧠 AI is creating your study plan..."):
+
+# # # # # # # # #             plan = generate_study_plan(
+# # # # # # # # #                 subjects,
+# # # # # # # # #                 hours
+# # # # # # # # #             )
+
+# # # # # # # # #         st.success("Study plan generated!")
+
+# # # # # # # # #         st.subheader(f"📅 {name}'s Study Plan")
+
+# # # # # # # # #         st.markdown(plan)
+
+# # # # # # # # #     else:
+
+# # # # # # # # #         st.warning(
+# # # # # # # # #             "Please enter your name and subjects."
+# # # # # # # # #         )
+
 
 
 
 # # # # # # # # import streamlit as st
 # # # # # # # # from agent import generate_study_plan
+# # # # # # # # from rescheduler import reschedule_plan
 
 
 # # # # # # # # st.set_page_config(
@@ -52,7 +107,12 @@
 # # # # # # # # st.title("📚 AI Study Assistant")
 # # # # # # # # st.write("Your personal AI-powered study planner")
 
-# # # # # # # # st.header("Student Information")
+
+# # # # # # # # # -----------------------------
+# # # # # # # # # STUDENT INFORMATION
+# # # # # # # # # -----------------------------
+
+# # # # # # # # st.header("👨‍🎓 Student Information")
 
 # # # # # # # # name = st.text_input("Your Name")
 
@@ -68,44 +128,133 @@
 # # # # # # # #     value=3
 # # # # # # # # )
 
-# # # # # # # # if st.button("Generate Study Plan"):
+
+# # # # # # # # # -----------------------------
+# # # # # # # # # GENERATE PLAN
+# # # # # # # # # -----------------------------
+
+# # # # # # # # if st.button("📚 Generate Study Plan"):
 
 # # # # # # # #     if name and subjects:
 
-# # # # # # # #         with st.spinner("🧠 AI is creating your study plan..."):
+# # # # # # # #         with st.spinner("🧠 Creating your study plan..."):
 
 # # # # # # # #             plan = generate_study_plan(
 # # # # # # # #                 subjects,
 # # # # # # # #                 hours
 # # # # # # # #             )
 
-# # # # # # # #         st.success("Study plan generated!")
-
-# # # # # # # #         st.subheader(f"📅 {name}'s Study Plan")
-
-# # # # # # # #         st.markdown(plan)
+# # # # # # # #         st.session_state["study_plan"] = plan
+# # # # # # # #         st.session_state["original_hours"] = hours
 
 # # # # # # # #     else:
 
-# # # # # # # #         st.warning(
-# # # # # # # #             "Please enter your name and subjects."
-# # # # # # # #         )
+# # # # # # # #         st.warning("Please enter your name and subjects.")
+
+
+# # # # # # # # # -----------------------------
+# # # # # # # # # DISPLAY ORIGINAL PLAN
+# # # # # # # # # -----------------------------
+
+# # # # # # # # if "study_plan" in st.session_state:
+
+# # # # # # # #     st.success("Study plan generated!")
+
+# # # # # # # #     st.subheader(f"📅 {name}'s Study Plan")
+
+# # # # # # # #     st.markdown(
+# # # # # # # #         st.session_state["study_plan"]
+# # # # # # # #     )
+
+
+# # # # # # # #     # -----------------------------
+# # # # # # # #     # RESCHEDULER
+# # # # # # # #     # -----------------------------
+
+# # # # # # # #     st.divider()
+
+# # # # # # # #     st.header("🔄 Reschedule Your Plan")
+
+# # # # # # # #     st.write(
+# # # # # # # #         "Something came up? Tell the AI how much time you have now."
+# # # # # # # #     )
+
+# # # # # # # #     new_hours = st.number_input(
+# # # # # # # #         "How many hours do you have now?",
+# # # # # # # #         min_value=1,
+# # # # # # # #         max_value=12,
+# # # # # # # #         value=2
+# # # # # # # #     )
+
+# # # # # # # #     reason = st.text_area(
+# # # # # # # #         "What changed?",
+# # # # # # # #         placeholder="I only have 2 hours today."
+# # # # # # # #     )
+
+# # # # # # # #     if st.button("🔄 Reschedule Plan"):
+
+# # # # # # # #         if reason:
+
+# # # # # # # #             with st.spinner(
+# # # # # # # #                 "🧠 Rescheduling your study plan..."
+# # # # # # # #             ):
+
+# # # # # # # #                 new_plan = reschedule_plan(
+# # # # # # # #                     st.session_state["study_plan"],
+# # # # # # # #                     new_hours,
+# # # # # # # #                     reason
+# # # # # # # #                 )
+
+# # # # # # # #             st.session_state["rescheduled_plan"] = new_plan
+
+# # # # # # # #         else:
+
+# # # # # # # #             st.warning("Please explain why you need to reschedule.")
+
+
+# # # # # # # # # -----------------------------
+# # # # # # # # # DISPLAY NEW PLAN
+# # # # # # # # # -----------------------------
+
+# # # # # # # # if "rescheduled_plan" in st.session_state:
+
+# # # # # # # #     st.success("Plan successfully rescheduled!")
+
+# # # # # # # #     st.subheader("🔄 Your New Study Plan")
+
+# # # # # # # #     st.markdown(
+# # # # # # # #         st.session_state["rescheduled_plan"]
+# # # # # # # #     )
+
 
 
 
 
 # # # # # # # import streamlit as st
+
 # # # # # # # from agent import generate_study_plan
 # # # # # # # from rescheduler import reschedule_plan
 
+
+# # # # # # # # -----------------------------
+# # # # # # # # PAGE CONFIG
+# # # # # # # # -----------------------------
 
 # # # # # # # st.set_page_config(
 # # # # # # #     page_title="AI Study Assistant",
 # # # # # # #     page_icon="📚"
 # # # # # # # )
 
+
+# # # # # # # # -----------------------------
+# # # # # # # # TITLE
+# # # # # # # # -----------------------------
+
 # # # # # # # st.title("📚 AI Study Assistant")
-# # # # # # # st.write("Your personal AI-powered study planner")
+
+# # # # # # # st.write(
+# # # # # # #     "Your personal AI-powered study planner"
+# # # # # # # )
 
 
 # # # # # # # # -----------------------------
@@ -114,7 +263,9 @@
 
 # # # # # # # st.header("👨‍🎓 Student Information")
 
-# # # # # # # name = st.text_input("Your Name")
+# # # # # # # name = st.text_input(
+# # # # # # #     "Your Name"
+# # # # # # # )
 
 # # # # # # # subjects = st.text_input(
 # # # # # # #     "Subjects",
@@ -130,37 +281,54 @@
 
 
 # # # # # # # # -----------------------------
-# # # # # # # # GENERATE PLAN
+# # # # # # # # GENERATE ORIGINAL PLAN
 # # # # # # # # -----------------------------
 
 # # # # # # # if st.button("📚 Generate Study Plan"):
 
 # # # # # # #     if name and subjects:
 
-# # # # # # #         with st.spinner("🧠 Creating your study plan..."):
+# # # # # # #         with st.spinner(
+# # # # # # #             "🧠 AI is creating your study plan..."
+# # # # # # #         ):
 
 # # # # # # #             plan = generate_study_plan(
 # # # # # # #                 subjects,
 # # # # # # #                 hours
 # # # # # # #             )
 
+# # # # # # #         # Save the plan
 # # # # # # #         st.session_state["study_plan"] = plan
 # # # # # # #         st.session_state["original_hours"] = hours
+# # # # # # #         st.session_state["name"] = name
+
+# # # # # # #         # Remove old rescheduled plan
+# # # # # # #         if "rescheduled_plan" in st.session_state:
+# # # # # # #             del st.session_state["rescheduled_plan"]
 
 # # # # # # #     else:
 
-# # # # # # #         st.warning("Please enter your name and subjects.")
+# # # # # # #         st.warning(
+# # # # # # #             "Please enter your name and subjects."
+# # # # # # #         )
 
 
 # # # # # # # # -----------------------------
-# # # # # # # # DISPLAY ORIGINAL PLAN
+# # # # # # # # ORIGINAL STUDY PLAN
 # # # # # # # # -----------------------------
 
 # # # # # # # if "study_plan" in st.session_state:
 
 # # # # # # #     st.success("Study plan generated!")
 
-# # # # # # #     st.subheader(f"📅 {name}'s Study Plan")
+# # # # # # #     st.header(
+# # # # # # #         f"📅 {st.session_state['name']}'s Study Plan"
+# # # # # # #     )
+
+# # # # # # #     st.caption(
+# # # # # # #         f"Original available time: "
+# # # # # # #         f"{st.session_state['original_hours']} hours"
+# # # # # # #     )
 
 # # # # # # #     st.markdown(
 # # # # # # #         st.session_state["study_plan"]
@@ -168,59 +336,90 @@
 
 
 # # # # # # #     # -----------------------------
-# # # # # # #     # RESCHEDULER
+# # # # # # #     # AI CHAT
 # # # # # # #     # -----------------------------
 
 # # # # # # #     st.divider()
 
-# # # # # # #     st.header("🔄 Reschedule Your Plan")
+# # # # # # #     st.header("🤖 AI Rescheduling Assistant")
 
 # # # # # # #     st.write(
-# # # # # # #         "Something came up? Tell the AI how much time you have now."
+# # # # # # #         "Something changed? Tell the AI what happened."
 # # # # # # #     )
 
-# # # # # # #     new_hours = st.number_input(
-# # # # # # #         "How many hours do you have now?",
-# # # # # # #         min_value=1,
-# # # # # # #         max_value=12,
-# # # # # # #         value=2
+# # # # # # #     st.info(
+# # # # # # #         "Example: "
+# # # # # # #         "\"I only have 2 hours today because I have an appointment.\""
 # # # # # # #     )
 
-# # # # # # #     reason = st.text_area(
-# # # # # # #         "What changed?",
-# # # # # # #         placeholder="I only have 2 hours today."
+
+# # # # # # #     # Chat history
+# # # # # # #     if "chat_history" not in st.session_state:
+# # # # # # #         st.session_state["chat_history"] = []
+
+
+# # # # # # #     # Display previous messages
+# # # # # # #     for message in st.session_state["chat_history"]:
+
+# # # # # # #         with st.chat_message(message["role"]):
+
+# # # # # # #             st.markdown(message["content"])
+
+
+# # # # # # #     # Chat input
+# # # # # # #     user_message = st.chat_input(
+# # # # # # #         "Tell me what changed..."
 # # # # # # #     )
 
-# # # # # # #     if st.button("🔄 Reschedule Plan"):
 
-# # # # # # #         if reason:
+# # # # # # #     if user_message:
 
-# # # # # # #             with st.spinner(
-# # # # # # #                 "🧠 Rescheduling your study plan..."
-# # # # # # #             ):
+# # # # # # #         # Show user message
+# # # # # # #         st.session_state["chat_history"].append(
+# # # # # # #             {
+# # # # # # #                 "role": "user",
+# # # # # # #                 "content": user_message
+# # # # # # #             }
+# # # # # # #         )
 
-# # # # # # #                 new_plan = reschedule_plan(
-# # # # # # #                     st.session_state["study_plan"],
-# # # # # # #                     new_hours,
-# # # # # # #                     reason
-# # # # # # #                 )
+# # # # # # #         with st.chat_message("user"):
+# # # # # # #             st.markdown(user_message)
 
-# # # # # # #             st.session_state["rescheduled_plan"] = new_plan
 
-# # # # # # #         else:
+# # # # # # #         # Generate new plan
+# # # # # # #         with st.spinner(
+# # # # # # #             "🧠 AI is rescheduling your plan..."
+# # # # # # #         ):
 
-# # # # # # #             st.warning("Please explain why you need to reschedule.")
+# # # # # # #             new_plan = reschedule_plan(
+# # # # # # #                 st.session_state["study_plan"],
+# # # # # # #                 user_message
+# # # # # # #             )
+
+
+# # # # # # #         # Save response
+# # # # # # #         st.session_state["rescheduled_plan"] = new_plan
+
+# # # # # # #         st.session_state["chat_history"].append(
+# # # # # # #             {
+# # # # # # #                 "role": "assistant",
+# # # # # # #                 "content": new_plan
+# # # # # # #             }
+# # # # # # #         )
+
+# # # # # # #         # Rerun to display everything properly
+# # # # # # #         st.rerun()
 
 
 # # # # # # # # -----------------------------
-# # # # # # # # DISPLAY NEW PLAN
+# # # # # # # # RESCHEDULED PLAN
 # # # # # # # # -----------------------------
 
 # # # # # # # if "rescheduled_plan" in st.session_state:
 
-# # # # # # #     st.success("Plan successfully rescheduled!")
+# # # # # # #     st.divider()
 
-# # # # # # #     st.subheader("🔄 Your New Study Plan")
+# # # # # # #     st.header("🔄 Your Rescheduled Plan")
 
 # # # # # # #     st.markdown(
 # # # # # # #         st.session_state["rescheduled_plan"]
@@ -231,24 +430,26 @@
 
 
 # # # # # # import streamlit as st
+# # # # # # from datetime import time
 
 # # # # # # from agent import generate_study_plan
 # # # # # # from rescheduler import reschedule_plan
 
 
-# # # # # # # -----------------------------
+# # # # # # # ============================================
 # # # # # # # PAGE CONFIG
-# # # # # # # -----------------------------
+# # # # # # # ============================================
 
 # # # # # # st.set_page_config(
 # # # # # #     page_title="AI Study Assistant",
-# # # # # #     page_icon="📚"
+# # # # # #     page_icon="📚",
+# # # # # #     layout="centered"
 # # # # # # )
 
 
-# # # # # # # -----------------------------
+# # # # # # # ============================================
 # # # # # # # TITLE
-# # # # # # # -----------------------------
+# # # # # # # ============================================
 
 # # # # # # st.title("📚 AI Study Assistant")
 
@@ -257,36 +458,105 @@
 # # # # # # )
 
 
-# # # # # # # -----------------------------
+# # # # # # # ============================================
 # # # # # # # STUDENT INFORMATION
-# # # # # # # -----------------------------
+# # # # # # # ============================================
 
 # # # # # # st.header("👨‍🎓 Student Information")
+
 
 # # # # # # name = st.text_input(
 # # # # # #     "Your Name"
 # # # # # # )
+
 
 # # # # # # subjects = st.text_input(
 # # # # # #     "Subjects",
 # # # # # #     placeholder="DSA, Java, Maths"
 # # # # # # )
 
-# # # # # # hours = st.number_input(
-# # # # # #     "Available study hours today",
-# # # # # #     min_value=1,
-# # # # # #     max_value=12,
-# # # # # #     value=3
+
+# # # # # # # ============================================
+# # # # # # # TIME SLOT
+# # # # # # # ============================================
+
+# # # # # # st.subheader("📅 Choose Your Study Time")
+
+
+# # # # # # start_time = st.time_input(
+# # # # # #     "Start Time",
+# # # # # #     value=time(18, 0)
 # # # # # # )
 
 
-# # # # # # # -----------------------------
-# # # # # # # GENERATE ORIGINAL PLAN
-# # # # # # # -----------------------------
+# # # # # # end_time = st.time_input(
+# # # # # #     "End Time",
+# # # # # #     value=time(23, 0)
+# # # # # # )
 
-# # # # # # if st.button("📚 Generate Study Plan"):
 
-# # # # # #     if name and subjects:
+# # # # # # # Calculate available time
+
+# # # # # # start_minutes = (
+# # # # # #     start_time.hour * 60
+# # # # # #     + start_time.minute
+# # # # # # )
+
+
+# # # # # # end_minutes = (
+# # # # # #     end_time.hour * 60
+# # # # # #     + end_time.minute
+# # # # # # )
+
+
+# # # # # # if end_minutes > start_minutes:
+
+# # # # # #     available_minutes = (
+# # # # # #         end_minutes - start_minutes
+# # # # # #     )
+
+# # # # # #     available_hours = (
+# # # # # #         available_minutes / 60
+# # # # # #     )
+
+
+# # # # # #     st.info(
+# # # # # #         f"⏱️ Available study time: "
+# # # # # #         f"**{available_hours:.1f} hours**"
+# # # # # #     )
+
+
+# # # # # # else:
+
+# # # # # #     available_minutes = 0
+
+# # # # # #     st.error(
+# # # # # #         "⚠️ End time must be after start time."
+# # # # # #     )
+
+
+# # # # # # # ============================================
+# # # # # # # GENERATE PLAN
+# # # # # # # ============================================
+
+# # # # # # if st.button(
+# # # # # #     "📚 Generate Study Plan",
+# # # # # #     use_container_width=True
+# # # # # # ):
+
+# # # # # #     if not name or not subjects:
+
+# # # # # #         st.warning(
+# # # # # #             "Please enter your name and subjects."
+# # # # # #         )
+
+# # # # # #     elif available_minutes <= 0:
+
+# # # # # #         st.error(
+# # # # # #             "Please select a valid study time."
+# # # # # #         )
+
+# # # # # #     else:
 
 # # # # # #         with st.spinner(
 # # # # # #             "🧠 AI is creating your study plan..."
@@ -294,79 +564,137 @@
 
 # # # # # #             plan = generate_study_plan(
 # # # # # #                 subjects,
-# # # # # #                 hours
+# # # # # #                 start_time,
+# # # # # #                 end_time
 # # # # # #             )
 
-# # # # # #         # Save the plan
+
+# # # # # #         # Save information
+
 # # # # # #         st.session_state["study_plan"] = plan
-# # # # # #         st.session_state["original_hours"] = hours
+
 # # # # # #         st.session_state["name"] = name
 
-# # # # # #         # Remove old rescheduled plan
+# # # # # #         st.session_state["subjects"] = subjects
+
+# # # # # #         st.session_state["start_time"] = start_time
+
+# # # # # #         st.session_state["end_time"] = end_time
+
+# # # # # #         st.session_state[
+# # # # # #             "available_minutes"
+# # # # # #         ] = available_minutes
+
+
+# # # # # #         # Clear previous rescheduling
+
 # # # # # #         if "rescheduled_plan" in st.session_state:
-# # # # # #             del st.session_state["rescheduled_plan"]
 
-# # # # # #     else:
-
-# # # # # #         st.warning(
-# # # # # #             "Please enter your name and subjects."
-# # # # # #         )
+# # # # # #             del st.session_state[
+# # # # # #                 "rescheduled_plan"
+# # # # # #             ]
 
 
-# # # # # # # -----------------------------
+# # # # # #         if "chat_history" in st.session_state:
+
+# # # # # #             st.session_state[
+# # # # # #                 "chat_history"
+# # # # # #             ] = []
+
+
+# # # # # # # ============================================
 # # # # # # # ORIGINAL STUDY PLAN
-# # # # # # # -----------------------------
+# # # # # # # ============================================
 
 # # # # # # if "study_plan" in st.session_state:
 
-# # # # # #     st.success("Study plan generated!")
+# # # # # #     st.divider()
+
 
 # # # # # #     st.header(
 # # # # # #         f"📅 {st.session_state['name']}'s Study Plan"
 # # # # # #     )
 
-# # # # # #     st.caption(
-# # # # # #         f"Original available time: "
-# # # # # #         f"{st.session_state['original_hours']} hours"
+
+# # # # # #     original_hours = (
+# # # # # #         st.session_state[
+# # # # # #             "available_minutes"
+# # # # # #         ] / 60
 # # # # # #     )
+
+
+# # # # # #     st.caption(
+# # # # # #         f"🕐 Study Slot: "
+# # # # # #         f"{st.session_state['start_time'].strftime('%I:%M %p')}"
+# # # # # #         f" – "
+# # # # # #         f"{st.session_state['end_time'].strftime('%I:%M %p')}"
+# # # # # #     )
+
+
+# # # # # #     st.caption(
+# # # # # #         f"⏱️ Available Study Time: "
+# # # # # #         f"{original_hours:.1f} hours"
+# # # # # #     )
+
 
 # # # # # #     st.markdown(
 # # # # # #         st.session_state["study_plan"]
 # # # # # #     )
 
 
-# # # # # #     # -----------------------------
-# # # # # #     # AI CHAT
-# # # # # #     # -----------------------------
+# # # # # # # ============================================
+# # # # # # # AI RESCHEDULING ASSISTANT
+# # # # # # # ============================================
+
+# # # # # # if "study_plan" in st.session_state:
 
 # # # # # #     st.divider()
 
-# # # # # #     st.header("🤖 AI Rescheduling Assistant")
+
+# # # # # #     st.header(
+# # # # # #         "🤖 AI Rescheduling Assistant"
+# # # # # #     )
+
 
 # # # # # #     st.write(
-# # # # # #         "Something changed? Tell the AI what happened."
+# # # # # #         "Something changed? "
+# # # # # #         "Tell the AI what happened."
 # # # # # #     )
+
 
 # # # # # #     st.info(
 # # # # # #         "Example: "
-# # # # # #         "\"I only have 2 hours today because I have an appointment.\""
+# # # # # #         "\"I only have 2 hours today because "
+# # # # # #         "I have an appointment.\""
 # # # # # #     )
 
 
-# # # # # #     # Chat history
+# # # # # #     # Initialize chat history
+
 # # # # # #     if "chat_history" not in st.session_state:
-# # # # # #         st.session_state["chat_history"] = []
+
+# # # # # #         st.session_state[
+# # # # # #             "chat_history"
+# # # # # #         ] = []
 
 
 # # # # # #     # Display previous messages
-# # # # # #     for message in st.session_state["chat_history"]:
 
-# # # # # #         with st.chat_message(message["role"]):
+# # # # # #     for message in st.session_state[
+# # # # # #         "chat_history"
+# # # # # #     ]:
 
-# # # # # #             st.markdown(message["content"])
+# # # # # #         with st.chat_message(
+# # # # # #             message["role"]
+# # # # # #         ):
+
+# # # # # #             st.markdown(
+# # # # # #                 message["content"]
+# # # # # #             )
 
 
 # # # # # #     # Chat input
+
 # # # # # #     user_message = st.chat_input(
 # # # # # #         "Tell me what changed..."
 # # # # # #     )
@@ -374,55 +702,92 @@
 
 # # # # # #     if user_message:
 
-# # # # # #         # Show user message
-# # # # # #         st.session_state["chat_history"].append(
-# # # # # #             {
-# # # # # #                 "role": "user",
-# # # # # #                 "content": user_message
-# # # # # #             }
-# # # # # #         )
+# # # # # #         # Display user message
+
+# # # # # #         st.session_state[
+# # # # # #             "chat_history"
+# # # # # #         ].append({
+
+# # # # # #             "role": "user",
+
+# # # # # #             "content": user_message
+
+# # # # # #         })
+
 
 # # # # # #         with st.chat_message("user"):
-# # # # # #             st.markdown(user_message)
+
+# # # # # #             st.markdown(
+# # # # # #                 user_message
+# # # # # #             )
 
 
 # # # # # #         # Generate new plan
+
 # # # # # #         with st.spinner(
 # # # # # #             "🧠 AI is rescheduling your plan..."
 # # # # # #         ):
 
 # # # # # #             new_plan = reschedule_plan(
-# # # # # #                 st.session_state["study_plan"],
-# # # # # #                 user_message
+
+# # # # # #                 st.session_state[
+# # # # # #                     "study_plan"
+# # # # # #                 ],
+
+# # # # # #                 user_message,
+
+# # # # # #                 st.session_state[
+# # # # # #                     "start_time"
+# # # # # #                 ],
+
+# # # # # #                 st.session_state[
+# # # # # #                     "end_time"
+# # # # # #                 ]
+
 # # # # # #             )
 
 
-# # # # # #         # Save response
-# # # # # #         st.session_state["rescheduled_plan"] = new_plan
+# # # # # #         # Save new plan
 
-# # # # # #         st.session_state["chat_history"].append(
-# # # # # #             {
-# # # # # #                 "role": "assistant",
-# # # # # #                 "content": new_plan
-# # # # # #             }
-# # # # # #         )
+# # # # # #         st.session_state[
+# # # # # #             "rescheduled_plan"
+# # # # # #         ] = new_plan
 
-# # # # # #         # Rerun to display everything properly
+
+# # # # # #         # Add AI response
+
+# # # # # #         st.session_state[
+# # # # # #             "chat_history"
+# # # # # #         ].append({
+
+# # # # # #             "role": "assistant",
+
+# # # # # #             "content": new_plan
+
+# # # # # #         })
+
+
 # # # # # #         st.rerun()
 
 
-# # # # # # # -----------------------------
+# # # # # # # ============================================
 # # # # # # # RESCHEDULED PLAN
-# # # # # # # -----------------------------
+# # # # # # # ============================================
 
 # # # # # # if "rescheduled_plan" in st.session_state:
 
 # # # # # #     st.divider()
 
-# # # # # #     st.header("🔄 Your Rescheduled Plan")
+
+# # # # # #     st.header(
+# # # # # #         "🔄 Your Rescheduled Plan"
+# # # # # #     )
+
 
 # # # # # #     st.markdown(
-# # # # # #         st.session_state["rescheduled_plan"]
+# # # # # #         st.session_state[
+# # # # # #             "rescheduled_plan"
+# # # # # #         ]
 # # # # # #     )
 
 
@@ -464,11 +829,9 @@
 
 # # # # # st.header("👨‍🎓 Student Information")
 
-
 # # # # # name = st.text_input(
 # # # # #     "Your Name"
 # # # # # )
-
 
 # # # # # subjects = st.text_input(
 # # # # #     "Subjects",
@@ -482,12 +845,10 @@
 
 # # # # # st.subheader("📅 Choose Your Study Time")
 
-
 # # # # # start_time = st.time_input(
 # # # # #     "Start Time",
 # # # # #     value=time(18, 0)
 # # # # # )
-
 
 # # # # # end_time = st.time_input(
 # # # # #     "End Time",
@@ -501,7 +862,6 @@
 # # # # #     start_time.hour * 60
 # # # # #     + start_time.minute
 # # # # # )
-
 
 # # # # # end_minutes = (
 # # # # #     end_time.hour * 60
@@ -519,12 +879,10 @@
 # # # # #         available_minutes / 60
 # # # # #     )
 
-
 # # # # #     st.info(
 # # # # #         f"⏱️ Available study time: "
 # # # # #         f"**{available_hours:.1f} hours**"
 # # # # #     )
-
 
 # # # # # else:
 
@@ -536,7 +894,7 @@
 
 
 # # # # # # ============================================
-# # # # # # GENERATE PLAN
+# # # # # # GENERATE STUDY PLAN
 # # # # # # ============================================
 
 # # # # # if st.button(
@@ -586,7 +944,7 @@
 # # # # #         ] = available_minutes
 
 
-# # # # #         # Clear previous rescheduling
+# # # # #         # Clear previous rescheduled plan
 
 # # # # #         if "rescheduled_plan" in st.session_state:
 
@@ -595,11 +953,11 @@
 # # # # #             ]
 
 
-# # # # #         if "chat_history" in st.session_state:
+# # # # #         # Clear previous chat
 
-# # # # #             st.session_state[
-# # # # #                 "chat_history"
-# # # # #             ] = []
+# # # # #         st.session_state[
+# # # # #             "chat_history"
+# # # # #         ] = []
 
 
 # # # # # # ============================================
@@ -609,7 +967,6 @@
 # # # # # if "study_plan" in st.session_state:
 
 # # # # #     st.divider()
-
 
 # # # # #     st.header(
 # # # # #         f"📅 {st.session_state['name']}'s Study Plan"
@@ -637,6 +994,8 @@
 # # # # #     )
 
 
+# # # # #     # Display original plan
+
 # # # # #     st.markdown(
 # # # # #         st.session_state["study_plan"]
 # # # # #     )
@@ -650,11 +1009,9 @@
 
 # # # # #     st.divider()
 
-
 # # # # #     st.header(
 # # # # #         "🤖 AI Rescheduling Assistant"
 # # # # #     )
-
 
 # # # # #     st.write(
 # # # # #         "Something changed? "
@@ -678,7 +1035,7 @@
 # # # # #         ] = []
 
 
-# # # # #     # Display previous messages
+# # # # #     # Display chat messages
 
 # # # # #     for message in st.session_state[
 # # # # #         "chat_history"
@@ -702,7 +1059,9 @@
 
 # # # # #     if user_message:
 
-# # # # #         # Display user message
+# # # # #         # ------------------------------------
+# # # # #         # USER MESSAGE
+# # # # #         # ------------------------------------
 
 # # # # #         st.session_state[
 # # # # #             "chat_history"
@@ -722,7 +1081,9 @@
 # # # # #             )
 
 
-# # # # #         # Generate new plan
+# # # # #         # ------------------------------------
+# # # # #         # GENERATE RESCHEDULED PLAN
+# # # # #         # ------------------------------------
 
 # # # # #         with st.spinner(
 # # # # #             "🧠 AI is rescheduling your plan..."
@@ -747,14 +1108,18 @@
 # # # # #             )
 
 
-# # # # #         # Save new plan
+# # # # #         # ------------------------------------
+# # # # #         # SAVE NEW PLAN
+# # # # #         # ------------------------------------
 
 # # # # #         st.session_state[
 # # # # #             "rescheduled_plan"
 # # # # #         ] = new_plan
 
 
-# # # # #         # Add AI response
+# # # # #         # ------------------------------------
+# # # # #         # SHORT AI CHAT RESPONSE
+# # # # #         # ------------------------------------
 
 # # # # #         st.session_state[
 # # # # #             "chat_history"
@@ -762,10 +1127,16 @@
 
 # # # # #             "role": "assistant",
 
-# # # # #             "content": new_plan
+# # # # #             "content":
+# # # # #                 "✅ I've rescheduled your "
+# # # # #                 "study plan based on your new "
+# # # # #                 "available time. Your updated "
+# # # # #                 "plan is shown below."
 
 # # # # #         })
 
+
+# # # # #         # Refresh page
 
 # # # # #         st.rerun()
 
@@ -778,11 +1149,12 @@
 
 # # # # #     st.divider()
 
-
 # # # # #     st.header(
 # # # # #         "🔄 Your Rescheduled Plan"
 # # # # #     )
 
+
+# # # # #     # Display the plan ONLY here
 
 # # # # #     st.markdown(
 # # # # #         st.session_state[
@@ -794,11 +1166,21 @@
 
 
 
+
+
+
+
+
+
+
 # # # # import streamlit as st
-# # # # from datetime import time
+# # # # from datetime import time, date
 
 # # # # from agent import generate_study_plan
+# # # # from priority import calculate_priority
 # # # # from rescheduler import reschedule_plan
+# # # # from dashboard import show_dashboard
+# # # # from google_calendar import add_study_plan_to_calendar
 
 
 # # # # # ============================================
@@ -819,7 +1201,7 @@
 # # # # st.title("📚 AI Study Assistant")
 
 # # # # st.write(
-# # # #     "Your personal AI-powered study planner"
+# # # #     "YOUR PERSONAL AI-POWERED ADAPTIVE STUDY PLANNER"
 # # # # )
 
 
@@ -829,26 +1211,160 @@
 
 # # # # st.header("👨‍🎓 Student Information")
 
+
 # # # # name = st.text_input(
 # # # #     "Your Name"
 # # # # )
 
-# # # # subjects = st.text_input(
+
+# # # # subjects_input = st.text_input(
 # # # #     "Subjects",
 # # # #     placeholder="DSA, Java, Maths"
 # # # # )
 
 
 # # # # # ============================================
+# # # # # SUBJECT INFORMATION
+# # # # # ============================================
+
+# # # # subject_names = [
+# # # #     subject.strip()
+# # # #     for subject in subjects_input.split(",")
+# # # #     if subject.strip()
+# # # # ]
+
+
+# # # # if subject_names:
+
+# # # #     st.subheader(
+# # # #         "📊 Subject Information"
+# # # #     )
+
+# # # #     st.caption(
+# # # #         "This information is used to calculate "
+# # # #         "priority."
+# # # #     )
+
+
+# # # #     subject_data = []
+
+
+# # # #     for subject in subject_names:
+
+# # # #         st.markdown(
+# # # #             f"### 📚 {subject}"
+# # # #         )
+
+
+# # # #         col1, col2 = st.columns(2)
+
+
+# # # #         with col1:
+
+# # # #             exam_date = st.date_input(
+# # # #                 f"Exam Date — {subject}",
+# # # #                 value=date.today(),
+# # # #                 key=f"exam_{subject}"
+# # # #             )
+
+
+# # # #         with col2:
+
+# # # #             difficulty = st.selectbox(
+# # # #                 f"Difficulty — {subject}",
+# # # #                 [
+# # # #                     "Easy",
+# # # #                     "Medium",
+# # # #                     "Hard"
+# # # #                 ],
+# # # #                 index=1,
+# # # #                 key=f"difficulty_{subject}"
+# # # #             )
+
+
+# # # #         progress = st.slider(
+# # # #             f"Completed Syllabus — {subject}",
+# # # #             min_value=0,
+# # # #             max_value=100,
+# # # #             value=50,
+# # # #             step=5,
+# # # #             key=f"progress_{subject}"
+# # # #         )
+
+
+# # # #         # Calculate priority
+
+# # # #         priority_info = calculate_priority(
+
+# # # #             exam_date,
+
+# # # #             difficulty,
+
+# # # #             progress
+
+# # # #         )
+
+
+# # # #         subject_data.append({
+
+# # # #             "subject": subject,
+
+# # # #             "exam_date": exam_date,
+
+# # # #             "difficulty": difficulty,
+
+# # # #             "progress": progress,
+
+# # # #             "score": priority_info["score"],
+
+# # # #             "priority": priority_info["priority"],
+
+# # # #             "exam_score": priority_info["exam_score"],
+
+# # # #             "difficulty_score":
+# # # #                 priority_info[
+# # # #                     "difficulty_score"
+# # # #                 ],
+
+# # # #             "remaining_score":
+# # # #                 priority_info[
+# # # #                     "remaining_score"
+# # # #                 ]
+
+# # # #         })
+
+
+# # # #         # Show score
+
+# # # #         st.write(
+# # # #             f"🎯 Priority Score: "
+# # # #             f"**{priority_info['score']} / 100**"
+# # # #         )
+
+
+# # # #         st.write(
+# # # #             f"Priority: "
+# # # #             f"**{priority_info['priority']}**"
+# # # #         )
+
+
+# # # #         st.divider()
+
+
+# # # # # ============================================
 # # # # # TIME SLOT
 # # # # # ============================================
 
-# # # # st.subheader("📅 Choose Your Study Time")
+# # # # st.subheader(
+# # # #     "📅 Choose Your Study Time"
+# # # # )
+
 
 # # # # start_time = st.time_input(
 # # # #     "Start Time",
 # # # #     value=time(18, 0)
 # # # # )
+
 
 # # # # end_time = st.time_input(
 # # # #     "End Time",
@@ -856,12 +1372,11 @@
 # # # # )
 
 
-# # # # # Calculate available time
-
 # # # # start_minutes = (
 # # # #     start_time.hour * 60
 # # # #     + start_time.minute
 # # # # )
+
 
 # # # # end_minutes = (
 # # # #     end_time.hour * 60
@@ -872,29 +1387,35 @@
 # # # # if end_minutes > start_minutes:
 
 # # # #     available_minutes = (
-# # # #         end_minutes - start_minutes
+# # # #         end_minutes
+# # # #         - start_minutes
 # # # #     )
+
 
 # # # #     available_hours = (
 # # # #         available_minutes / 60
 # # # #     )
+
 
 # # # #     st.info(
 # # # #         f"⏱️ Available study time: "
 # # # #         f"**{available_hours:.1f} hours**"
 # # # #     )
 
+
 # # # # else:
 
 # # # #     available_minutes = 0
 
+
 # # # #     st.error(
-# # # #         "⚠️ End time must be after start time."
+# # # #         "⚠️ End time must be after "
+# # # #         "start time."
 # # # #     )
 
 
 # # # # # ============================================
-# # # # # GENERATE STUDY PLAN
+# # # # # GENERATE PLAN
 # # # # # ============================================
 
 # # # # if st.button(
@@ -902,11 +1423,19 @@
 # # # #     use_container_width=True
 # # # # ):
 
-# # # #     if not name or not subjects:
+# # # #     if not name:
 
 # # # #         st.warning(
-# # # #             "Please enter your name and subjects."
+# # # #             "Please enter your name."
 # # # #         )
+
+
+# # # #     elif not subject_names:
+
+# # # #         st.warning(
+# # # #             "Please enter at least one subject."
+# # # #         )
+
 
 # # # #     elif available_minutes <= 0:
 
@@ -914,37 +1443,63 @@
 # # # #             "Please select a valid study time."
 # # # #         )
 
+
 # # # #     else:
 
 # # # #         with st.spinner(
-# # # #             "🧠 AI is creating your study plan..."
+# # # #             "🧠 AI is creating your "
+# # # #             "personalized study plan..."
 # # # #         ):
 
 # # # #             plan = generate_study_plan(
-# # # #                 subjects,
+
+# # # #                 subject_data,
+
 # # # #                 start_time,
+
 # # # #                 end_time
+
 # # # #             )
 
 
-# # # #         # Save information
+# # # #         # Save everything
 
-# # # #         st.session_state["study_plan"] = plan
+# # # #         st.session_state[
+# # # #             "study_plan"
+# # # #         ] = plan["markdown"]
 
-# # # #         st.session_state["name"] = name
 
-# # # #         st.session_state["subjects"] = subjects
+# # # #         st.session_state[
+# # # #             "study_sessions"
+# # # #         ] = plan["sessions"]
 
-# # # #         st.session_state["start_time"] = start_time
 
-# # # #         st.session_state["end_time"] = end_time
+# # # #         st.session_state[
+# # # #             "subject_data"
+# # # #         ] = subject_data
+
+
+# # # #         st.session_state[
+# # # #             "name"
+# # # #         ] = name
+
+
+# # # #         st.session_state[
+# # # #             "start_time"
+# # # #         ] = start_time
+
+
+# # # #         st.session_state[
+# # # #             "end_time"
+# # # #         ] = end_time
+
 
 # # # #         st.session_state[
 # # # #             "available_minutes"
 # # # #         ] = available_minutes
 
 
-# # # #         # Clear previous rescheduled plan
+# # # #         # Clear old reschedule
 
 # # # #         if "rescheduled_plan" in st.session_state:
 
@@ -953,11 +1508,25 @@
 # # # #             ]
 
 
-# # # #         # Clear previous chat
-
 # # # #         st.session_state[
 # # # #             "chat_history"
 # # # #         ] = []
+
+
+
+# # # # # ============================================
+# # # # # STUDY DASHBOARD
+# # # # # ============================================
+
+# # # # if "subject_data" in st.session_state:
+
+# # # #     st.divider()
+
+# # # #     show_dashboard(
+# # # #         st.session_state["subject_data"]
+# # # #     )
+
+
 
 
 # # # # # ============================================
@@ -968,8 +1537,11 @@
 
 # # # #     st.divider()
 
+
 # # # #     st.header(
-# # # #         f"📅 {st.session_state['name']}'s Study Plan"
+# # # #         f"📅 "
+# # # #         f"{st.session_state['name']}'s "
+# # # #         f"Study Plan"
 # # # #     )
 
 
@@ -994,11 +1566,99 @@
 # # # #     )
 
 
-# # # #     # Display original plan
+# # # #     st.markdown(
+# # # #         st.session_state[
+# # # #             "study_plan"
+# # # #         ]
+# # # #     )
+
+# # # #     st.info(
+# # # #     "💡 The AI prioritizes subjects using "
+# # # #     "exam urgency, difficulty, and remaining "
+# # # #     "syllabus. If your available time is too "
+# # # #     "short, lower-priority subjects may be "
+# # # #     "deferred."
+# # # # )
+
+
+# # # # # ============================================
+# # # # # PRIORITY ANALYSIS
+# # # # # ============================================
+
+# # # # if "subject_data" in st.session_state:
+
+# # # #     st.divider()
+
+
+# # # #     st.header(
+# # # #         "🎯 Priority Analysis"
+# # # #     )
+
+
+# # # #     st.write(
+# # # #         "The priority score is calculated using:"
+# # # #     )
+
 
 # # # #     st.markdown(
-# # # #         st.session_state["study_plan"]
+# # # #         """
+# # # #         **40% Exam Urgency + 30% Difficulty + 30% Remaining Syllabus**
+# # # #         """
 # # # #     )
+
+
+# # # #     for item in sorted(
+# # # #         st.session_state["subject_data"],
+# # # #         key=lambda x: x["score"],
+# # # #         reverse=True
+# # # #     ):
+
+# # # #         with st.expander(
+# # # #             f"{item['subject']} — "
+# # # #             f"{item['priority']} "
+# # # #             f"({item['score']}/100)"
+# # # #         ):
+
+# # # #             st.write(
+# # # #                 f"📅 Exam Date: "
+# # # #                 f"{item['exam_date']}"
+# # # #             )
+
+
+# # # #             st.write(
+# # # #                 f"🎯 Difficulty: "
+# # # #                 f"{item['difficulty']}"
+# # # #             )
+
+
+# # # #             st.write(
+# # # #                 f"📊 Completed: "
+# # # #                 f"{item['progress']}%"
+# # # #             )
+
+
+# # # #             st.write(
+# # # #                 f"⏳ Remaining: "
+# # # #                 f"{100 - item['progress']}%"
+# # # #             )
+
+
+# # # #             st.write(
+# # # #                 f"📅 Exam Urgency Score: "
+# # # #                 f"{item['exam_score']}"
+# # # #             )
+
+
+# # # #             st.write(
+# # # #                 f"🎯 Difficulty Score: "
+# # # #                 f"{item['difficulty_score']}"
+# # # #             )
+
+
+# # # #             st.write(
+# # # #                 f"📚 Remaining Syllabus Score: "
+# # # #                 f"{item['remaining_score']}"
+# # # #             )
 
 
 # # # # # ============================================
@@ -1009,9 +1669,11 @@
 
 # # # #     st.divider()
 
+
 # # # #     st.header(
 # # # #         "🤖 AI Rescheduling Assistant"
 # # # #     )
+
 
 # # # #     st.write(
 # # # #         "Something changed? "
@@ -1021,12 +1683,10 @@
 
 # # # #     st.info(
 # # # #         "Example: "
-# # # #         "\"I only have 2 hours today because "
-# # # #         "I have an appointment.\""
+# # # #         "\"I only have 1.5 hours today "
+# # # #         "because I have an appointment.\""
 # # # #     )
 
-
-# # # #     # Initialize chat history
 
 # # # #     if "chat_history" not in st.session_state:
 
@@ -1034,8 +1694,6 @@
 # # # #             "chat_history"
 # # # #         ] = []
 
-
-# # # #     # Display chat messages
 
 # # # #     for message in st.session_state[
 # # # #         "chat_history"
@@ -1050,18 +1708,12 @@
 # # # #             )
 
 
-# # # #     # Chat input
-
 # # # #     user_message = st.chat_input(
 # # # #         "Tell me what changed..."
 # # # #     )
 
 
 # # # #     if user_message:
-
-# # # #         # ------------------------------------
-# # # #         # USER MESSAGE
-# # # #         # ------------------------------------
 
 # # # #         st.session_state[
 # # # #             "chat_history"
@@ -1081,45 +1733,29 @@
 # # # #             )
 
 
-# # # #         # ------------------------------------
-# # # #         # GENERATE RESCHEDULED PLAN
-# # # #         # ------------------------------------
-
 # # # #         with st.spinner(
-# # # #             "🧠 AI is rescheduling your plan..."
+# # # #             "🧠 Rescheduling..."
 # # # #         ):
 
 # # # #             new_plan = reschedule_plan(
 
 # # # #                 st.session_state[
-# # # #                     "study_plan"
+# # # #                     "subject_data"
 # # # #                 ],
 
 # # # #                 user_message,
 
 # # # #                 st.session_state[
 # # # #                     "start_time"
-# # # #                 ],
-
-# # # #                 st.session_state[
-# # # #                     "end_time"
 # # # #                 ]
 
 # # # #             )
 
 
-# # # #         # ------------------------------------
-# # # #         # SAVE NEW PLAN
-# # # #         # ------------------------------------
-
 # # # #         st.session_state[
 # # # #             "rescheduled_plan"
 # # # #         ] = new_plan
 
-
-# # # #         # ------------------------------------
-# # # #         # SHORT AI CHAT RESPONSE
-# # # #         # ------------------------------------
 
 # # # #         st.session_state[
 # # # #             "chat_history"
@@ -1129,14 +1765,12 @@
 
 # # # #             "content":
 # # # #                 "✅ I've rescheduled your "
-# # # #                 "study plan based on your new "
-# # # #                 "available time. Your updated "
-# # # #                 "plan is shown below."
+# # # #                 "plan using your priority "
+# # # #                 "scores. Your updated plan "
+# # # #                 "is shown below."
 
 # # # #         })
 
-
-# # # #         # Refresh page
 
 # # # #         st.rerun()
 
@@ -1149,18 +1783,18 @@
 
 # # # #     st.divider()
 
+
 # # # #     st.header(
 # # # #         "🔄 Your Rescheduled Plan"
 # # # #     )
 
-
-# # # #     # Display the plan ONLY here
 
 # # # #     st.markdown(
 # # # #         st.session_state[
 # # # #             "rescheduled_plan"
 # # # #         ]
 # # # #     )
+
 
 
 
@@ -1211,11 +1845,9 @@
 
 # # # st.header("👨‍🎓 Student Information")
 
-
 # # # name = st.text_input(
 # # #     "Your Name"
 # # # )
-
 
 # # # subjects_input = st.text_input(
 # # #     "Subjects",
@@ -1245,9 +1877,7 @@
 # # #         "priority."
 # # #     )
 
-
 # # #     subject_data = []
-
 
 # # #     for subject in subject_names:
 
@@ -1255,9 +1885,7 @@
 # # #             f"### 📚 {subject}"
 # # #         )
 
-
 # # #         col1, col2 = st.columns(2)
-
 
 # # #         with col1:
 
@@ -1266,7 +1894,6 @@
 # # #                 value=date.today(),
 # # #                 key=f"exam_{subject}"
 # # #             )
-
 
 # # #         with col2:
 
@@ -1281,7 +1908,6 @@
 # # #                 key=f"difficulty_{subject}"
 # # #             )
 
-
 # # #         progress = st.slider(
 # # #             f"Completed Syllabus — {subject}",
 # # #             min_value=0,
@@ -1291,19 +1917,15 @@
 # # #             key=f"progress_{subject}"
 # # #         )
 
-
-# # #         # Calculate priority
+# # #         # ----------------------------------------
+# # #         # CALCULATE PRIORITY
+# # #         # ----------------------------------------
 
 # # #         priority_info = calculate_priority(
-
 # # #             exam_date,
-
 # # #             difficulty,
-
 # # #             progress
-
 # # #         )
-
 
 # # #         subject_data.append({
 
@@ -1322,31 +1944,26 @@
 # # #             "exam_score": priority_info["exam_score"],
 
 # # #             "difficulty_score":
-# # #                 priority_info[
-# # #                     "difficulty_score"
-# # #                 ],
+# # #                 priority_info["difficulty_score"],
 
 # # #             "remaining_score":
-# # #                 priority_info[
-# # #                     "remaining_score"
-# # #                 ]
+# # #                 priority_info["remaining_score"]
 
 # # #         })
 
-
-# # #         # Show score
+# # #         # ----------------------------------------
+# # #         # SHOW PRIORITY
+# # #         # ----------------------------------------
 
 # # #         st.write(
 # # #             f"🎯 Priority Score: "
 # # #             f"**{priority_info['score']} / 100**"
 # # #         )
 
-
 # # #         st.write(
 # # #             f"Priority: "
 # # #             f"**{priority_info['priority']}**"
 # # #         )
-
 
 # # #         st.divider()
 
@@ -1359,12 +1976,10 @@
 # # #     "📅 Choose Your Study Time"
 # # # )
 
-
 # # # start_time = st.time_input(
 # # #     "Start Time",
 # # #     value=time(18, 0)
 # # # )
-
 
 # # # end_time = st.time_input(
 # # #     "End Time",
@@ -1376,7 +1991,6 @@
 # # #     start_time.hour * 60
 # # #     + start_time.minute
 # # # )
-
 
 # # # end_minutes = (
 # # #     end_time.hour * 60
@@ -1391,22 +2005,18 @@
 # # #         - start_minutes
 # # #     )
 
-
 # # #     available_hours = (
 # # #         available_minutes / 60
 # # #     )
-
 
 # # #     st.info(
 # # #         f"⏱️ Available study time: "
 # # #         f"**{available_hours:.1f} hours**"
 # # #     )
 
-
 # # # else:
 
 # # #     available_minutes = 0
-
 
 # # #     st.error(
 # # #         "⚠️ End time must be after "
@@ -1429,20 +2039,17 @@
 # # #             "Please enter your name."
 # # #         )
 
-
 # # #     elif not subject_names:
 
 # # #         st.warning(
 # # #             "Please enter at least one subject."
 # # #         )
 
-
 # # #     elif available_minutes <= 0:
 
 # # #         st.error(
 # # #             "Please select a valid study time."
 # # #         )
-
 
 # # #     else:
 
@@ -1452,54 +2059,46 @@
 # # #         ):
 
 # # #             plan = generate_study_plan(
-
 # # #                 subject_data,
-
 # # #                 start_time,
-
 # # #                 end_time
-
 # # #             )
 
-
-# # #         # Save everything
+# # #         # ----------------------------------------
+# # #         # SAVE PLAN
+# # #         # ----------------------------------------
 
 # # #         st.session_state[
 # # #             "study_plan"
 # # #         ] = plan["markdown"]
 
-
 # # #         st.session_state[
 # # #             "study_sessions"
 # # #         ] = plan["sessions"]
-
 
 # # #         st.session_state[
 # # #             "subject_data"
 # # #         ] = subject_data
 
-
 # # #         st.session_state[
 # # #             "name"
 # # #         ] = name
-
 
 # # #         st.session_state[
 # # #             "start_time"
 # # #         ] = start_time
 
-
 # # #         st.session_state[
 # # #             "end_time"
 # # #         ] = end_time
-
 
 # # #         st.session_state[
 # # #             "available_minutes"
 # # #         ] = available_minutes
 
-
-# # #         # Clear old reschedule
+# # #         # ----------------------------------------
+# # #         # CLEAR OLD RESCHEDULE
+# # #         # ----------------------------------------
 
 # # #         if "rescheduled_plan" in st.session_state:
 
@@ -1507,11 +2106,13 @@
 # # #                 "rescheduled_plan"
 # # #             ]
 
+# # #         # ----------------------------------------
+# # #         # CLEAR CHAT
+# # #         # ----------------------------------------
 
 # # #         st.session_state[
 # # #             "chat_history"
 # # #         ] = []
-
 
 
 # # # # ============================================
@@ -1527,8 +2128,6 @@
 # # #     )
 
 
-
-
 # # # # ============================================
 # # # # ORIGINAL STUDY PLAN
 # # # # ============================================
@@ -1537,20 +2136,17 @@
 
 # # #     st.divider()
 
-
 # # #     st.header(
 # # #         f"📅 "
 # # #         f"{st.session_state['name']}'s "
 # # #         f"Study Plan"
 # # #     )
 
-
 # # #     original_hours = (
 # # #         st.session_state[
 # # #             "available_minutes"
 # # #         ] / 60
 # # #     )
-
 
 # # #     st.caption(
 # # #         f"🕐 Study Slot: "
@@ -1559,12 +2155,14 @@
 # # #         f"{st.session_state['end_time'].strftime('%I:%M %p')}"
 # # #     )
 
-
 # # #     st.caption(
 # # #         f"⏱️ Available Study Time: "
 # # #         f"{original_hours:.1f} hours"
 # # #     )
 
+# # #     # ----------------------------------------
+# # #     # SHOW PLAN
+# # #     # ----------------------------------------
 
 # # #     st.markdown(
 # # #         st.session_state[
@@ -1572,13 +2170,68 @@
 # # #         ]
 # # #     )
 
+# # #     # ========================================
+# # #     # GOOGLE CALENDAR
+# # #     # ========================================
+
+# # #     st.subheader(
+# # #         "📅 Google Calendar"
+# # #     )
+
+# # #     st.write(
+# # #         "Add your generated study plan "
+# # #         "directly to Google Calendar."
+# # #     )
+
+# # #     calendar_date = st.date_input(
+# # #         "Study Date",
+# # #         value=date.today(),
+# # #         key="calendar_date"
+# # #     )
+
+# # #     if st.button(
+# # #         "📅 Add Study Plan to Google Calendar",
+# # #         use_container_width=True
+# # #     ):
+
+# # #         try:
+
+# # #             events = add_study_plan_to_calendar(
+
+# # #                 st.session_state[
+# # #                     "study_sessions"
+# # #                 ],
+
+# # #                 calendar_date,
+
+# # #                 st.session_state[
+# # #                     "start_time"
+# # #                 ]
+
+# # #             )
+
+# # #             st.success(
+# # #                 f"✅ Added {len(events)} "
+# # #                 "study sessions to Google Calendar!"
+# # #             )
+
+# # #         except Exception as e:
+
+# # #             st.error(
+# # #                 f"❌ Google Calendar error: {e}"
+# # #             )
+
+# # #     # ----------------------------------------
+# # #     # INFORMATION
+# # #     # ----------------------------------------
+
 # # #     st.info(
-# # #     "💡 The AI prioritizes subjects using "
-# # #     "exam urgency, difficulty, and remaining "
-# # #     "syllabus. If your available time is too "
-# # #     "short, lower-priority subjects may be "
-# # #     "deferred."
-# # # )
+# # #         "💡 The AI prioritizes subjects using "
+# # #         "exam urgency, difficulty, and remaining "
+# # #         "syllabus. If your available time is too "
+# # #         "short, lower-priority subjects may be "
+# # #         "deferred."
+# # #     )
 
 
 # # # # ============================================
@@ -1589,23 +2242,19 @@
 
 # # #     st.divider()
 
-
 # # #     st.header(
 # # #         "🎯 Priority Analysis"
 # # #     )
 
-
 # # #     st.write(
 # # #         "The priority score is calculated using:"
 # # #     )
-
 
 # # #     st.markdown(
 # # #         """
 # # #         **40% Exam Urgency + 30% Difficulty + 30% Remaining Syllabus**
 # # #         """
 # # #     )
-
 
 # # #     for item in sorted(
 # # #         st.session_state["subject_data"],
@@ -1624,36 +2273,30 @@
 # # #                 f"{item['exam_date']}"
 # # #             )
 
-
 # # #             st.write(
 # # #                 f"🎯 Difficulty: "
 # # #                 f"{item['difficulty']}"
 # # #             )
-
 
 # # #             st.write(
 # # #                 f"📊 Completed: "
 # # #                 f"{item['progress']}%"
 # # #             )
 
-
 # # #             st.write(
 # # #                 f"⏳ Remaining: "
 # # #                 f"{100 - item['progress']}%"
 # # #             )
-
 
 # # #             st.write(
 # # #                 f"📅 Exam Urgency Score: "
 # # #                 f"{item['exam_score']}"
 # # #             )
 
-
 # # #             st.write(
 # # #                 f"🎯 Difficulty Score: "
 # # #                 f"{item['difficulty_score']}"
 # # #             )
-
 
 # # #             st.write(
 # # #                 f"📚 Remaining Syllabus Score: "
@@ -1669,24 +2312,26 @@
 
 # # #     st.divider()
 
-
 # # #     st.header(
 # # #         "🤖 AI Rescheduling Assistant"
 # # #     )
-
 
 # # #     st.write(
 # # #         "Something changed? "
 # # #         "Tell the AI what happened."
 # # #     )
 
-
 # # #     st.info(
-# # #         "Example: "
-# # #         "\"I only have 1.5 hours today "
-# # #         "because I have an appointment.\""
+# # #         "Examples:\n\n"
+# # #         "• \"I only have 1.5 hours today "
+# # #         "because I have an appointment.\"\n\n"
+# # #         "• \"I have my DSA exam tomorrow "
+# # #         "and only 3 hours to study.\"\n\n"
+# # #         "• \"My DSA paper is the next morning "
+# # #         "and I've got 2 hours.\"\n\n"
+# # #         "• \"I have a DSA test in 2 days "
+# # #         "and 4 hours available.\""
 # # #     )
-
 
 # # #     if "chat_history" not in st.session_state:
 
@@ -1694,6 +2339,9 @@
 # # #             "chat_history"
 # # #         ] = []
 
+# # #     # ----------------------------------------
+# # #     # SHOW CHAT HISTORY
+# # #     # ----------------------------------------
 
 # # #     for message in st.session_state[
 # # #         "chat_history"
@@ -1707,13 +2355,17 @@
 # # #                 message["content"]
 # # #             )
 
+# # #     # ----------------------------------------
+# # #     # CHAT INPUT
+# # #     # ----------------------------------------
 
 # # #     user_message = st.chat_input(
 # # #         "Tell me what changed..."
 # # #     )
 
-
 # # #     if user_message:
+
+# # #         # Save user message
 
 # # #         st.session_state[
 # # #             "chat_history"
@@ -1725,16 +2377,19 @@
 
 # # #         })
 
-
 # # #         with st.chat_message("user"):
 
 # # #             st.markdown(
 # # #                 user_message
 # # #             )
 
+# # #         # ------------------------------------
+# # #         # RESCHEDULE
+# # #         # ------------------------------------
 
 # # #         with st.spinner(
-# # #             "🧠 Rescheduling..."
+# # #             "🧠 Understanding your request "
+# # #             "and rescheduling..."
 # # #         ):
 
 # # #             new_plan = reschedule_plan(
@@ -1751,11 +2406,13 @@
 
 # # #             )
 
+# # #         # ------------------------------------
+# # #         # SAVE NEW PLAN
+# # #         # ------------------------------------
 
 # # #         st.session_state[
 # # #             "rescheduled_plan"
 # # #         ] = new_plan
-
 
 # # #         st.session_state[
 # # #             "chat_history"
@@ -1771,7 +2428,6 @@
 
 # # #         })
 
-
 # # #         st.rerun()
 
 
@@ -1783,17 +2439,19 @@
 
 # # #     st.divider()
 
-
 # # #     st.header(
 # # #         "🔄 Your Rescheduled Plan"
 # # #     )
-
 
 # # #     st.markdown(
 # # #         st.session_state[
 # # #             "rescheduled_plan"
 # # #         ]
 # # #     )
+
+
+
+
 
 
 
@@ -1817,640 +2475,1120 @@
 # # from google_calendar import add_study_plan_to_calendar
 
 
-# # # ============================================
+# # # ============================================================
 # # # PAGE CONFIG
-# # # ============================================
+# # # ============================================================
 
 # # st.set_page_config(
 # #     page_title="AI Study Assistant",
 # #     page_icon="📚",
-# #     layout="centered"
+# #     layout="wide",
+# #     initial_sidebar_state="expanded"
 # # )
 
 
-# # # ============================================
-# # # TITLE
-# # # ============================================
+# # # ============================================================
+# # # CUSTOM CSS
+# # # ============================================================
 
-# # st.title("📚 AI Study Assistant")
+# # st.markdown("""
+# # <style>
 
-# # st.write(
-# #     "YOUR PERSONAL AI-POWERED ADAPTIVE STUDY PLANNER"
-# # )
+# #     /* ---------- MAIN ---------- */
+
+# #     .block-container {
+# #         max-width: 1200px;
+# #         padding-top: 2rem;
+# #         padding-bottom: 4rem;
+# #     }
+
+# #     /* ---------- HERO ---------- */
+
+# #     .hero {
+# #         padding: 2.2rem 2.5rem;
+# #         border-radius: 24px;
+# #         background:
+# #             linear-gradient(
+# #                 135deg,
+# #                 rgba(91, 76, 255, 0.18),
+# #                 rgba(30, 30, 40, 0.85)
+# #             );
+# #         border: 1px solid rgba(255,255,255,0.08);
+# #         margin-bottom: 2rem;
+# #     }
+
+# #     .hero-title {
+# #         font-size: 3rem;
+# #         font-weight: 800;
+# #         margin-bottom: 0.3rem;
+# #     }
+
+# #     .hero-subtitle {
+# #         font-size: 1.15rem;
+# #         opacity: 0.75;
+# #     }
+
+# #     /* ---------- SECTION ---------- */
+
+# #     .section-title {
+# #         font-size: 1.8rem;
+# #         font-weight: 750;
+# #         margin-top: 1.5rem;
+# #         margin-bottom: 0.3rem;
+# #     }
+
+# #     .section-subtitle {
+# #         opacity: 0.65;
+# #         margin-bottom: 1.2rem;
+# #     }
+
+# #     /* ---------- FEATURE CARDS ---------- */
+
+# #     .feature-card {
+# #         padding: 1.2rem;
+# #         border-radius: 18px;
+# #         border: 1px solid rgba(255,255,255,0.08);
+# #         background: rgba(255,255,255,0.035);
+# #         min-height: 120px;
+# #     }
+
+# #     .feature-icon {
+# #         font-size: 1.8rem;
+# #     }
+
+# #     .feature-title {
+# #         font-weight: 700;
+# #         margin-top: 0.4rem;
+# #     }
+
+# #     .feature-text {
+# #         opacity: 0.65;
+# #         font-size: 0.9rem;
+# #     }
+
+# #     /* ---------- PRIORITY CARDS ---------- */
+
+# #     .priority-card {
+# #         padding: 1.2rem;
+# #         border-radius: 18px;
+# #         border: 1px solid rgba(255,255,255,0.08);
+# #         background: rgba(255,255,255,0.035);
+# #     }
+
+# #     .priority-subject {
+# #         font-size: 1.15rem;
+# #         font-weight: 750;
+# #     }
+
+# #     .priority-score {
+# #         font-size: 1.8rem;
+# #         font-weight: 800;
+# #     }
+
+# #     .priority-label {
+# #         font-size: 0.85rem;
+# #         opacity: 0.7;
+# #     }
+
+# #     /* ---------- INFO BAR ---------- */
+
+# #     .info-bar {
+# #         padding: 1rem 1.2rem;
+# #         border-radius: 14px;
+# #         background: rgba(255,255,255,0.04);
+# #         border: 1px solid rgba(255,255,255,0.07);
+# #         margin: 1rem 0;
+# #     }
+
+# #     /* ---------- FOOTER ---------- */
+
+# #     .footer {
+# #         text-align: center;
+# #         opacity: 0.45;
+# #         padding-top: 3rem;
+# #         font-size: 0.85rem;
+# #     }
+
+# # </style>
+# # """, unsafe_allow_html=True)
 
 
-# # # ============================================
-# # # STUDENT INFORMATION
-# # # ============================================
+# # # ============================================================
+# # # SESSION STATE
+# # # ============================================================
 
-# # st.header("👨‍🎓 Student Information")
-
-# # name = st.text_input(
-# #     "Your Name"
-# # )
-
-# # subjects_input = st.text_input(
-# #     "Subjects",
-# #     placeholder="DSA, Java, Maths"
-# # )
+# # if "chat_history" not in st.session_state:
+# #     st.session_state["chat_history"] = []
 
 
-# # # ============================================
-# # # SUBJECT INFORMATION
-# # # ============================================
+# # # ============================================================
+# # # HERO
+# # # ============================================================
 
-# # subject_names = [
-# #     subject.strip()
-# #     for subject in subjects_input.split(",")
-# #     if subject.strip()
+# # st.markdown("""
+# # <div class="hero">
+
+# #     <div class="hero-title">
+# #         📚 AI Study Assistant
+# #     </div>
+
+# #     <div class="hero-subtitle">
+# #         Your personal AI-powered adaptive study planner
+# #     </div>
+
+# # </div>
+# # """, unsafe_allow_html=True)
+
+
+# # # ============================================================
+# # # FEATURES
+# # # ============================================================
+
+# # feature_cols = st.columns(4)
+
+# # features = [
+# #     (
+# #         "🤖",
+# #         "AI Planning",
+# #         "Personalized study schedules"
+# #     ),
+# #     (
+# #         "🎯",
+# #         "Smart Priority",
+# #         "Exam + difficulty + progress"
+# #     ),
+# #     (
+# #         "🔄",
+# #         "Adaptive",
+# #         "Automatically reschedule plans"
+# #     ),
+# #     (
+# #         "📅",
+# #         "Calendar",
+# #         "Add your plan to Google Calendar"
+# #     )
 # # ]
 
 
-# # if subject_names:
+# # for col, feature in zip(
+# #     feature_cols,
+# #     features
+# # ):
 
-# #     st.subheader(
-# #         "📊 Subject Information"
+# #     icon, title, description = feature
+
+# #     with col:
+
+# #         st.markdown(
+# #             f"""
+# #             <div class="feature-card">
+
+# #                 <div class="feature-icon">
+# #                     {icon}
+# #                 </div>
+
+# #                 <div class="feature-title">
+# #                     {title}
+# #                 </div>
+
+# #                 <div class="feature-text">
+# #                     {description}
+# #                 </div>
+
+# #             </div>
+# #             """,
+# #             unsafe_allow_html=True
+# #         )
+
+
+# # st.write("")
+
+
+# # # ============================================================
+# # # SIDEBAR
+# # # ============================================================
+
+# # with st.sidebar:
+
+# #     st.markdown(
+# #         "## 📚 AI Study Assistant"
 # #     )
 
 # #     st.caption(
-# #         "This information is used to calculate "
-# #         "priority."
+# #         "Adaptive learning companion"
 # #     )
 
-# #     subject_data = []
+# #     st.divider()
 
-# #     for subject in subject_names:
+# #     st.markdown("### How it works")
+
+# #     st.markdown(
+# #         """
+# #         **1. Add your subjects**
+
+# #         **2. Set exam dates**
+
+# #         **3. Set difficulty**
+
+# #         **4. Set syllabus progress**
+
+# #         **5. Choose your study time**
+
+# #         **6. Let AI build your plan**
+
+# #         **7. Reschedule naturally when plans change**
+# #         """
+# #     )
+
+# #     st.divider()
+
+# #     st.markdown("### 🧠 Priority Formula")
+
+# #     st.caption(
+# #         "Exam urgency — 40%"
+# #     )
+
+# #     st.caption(
+# #         "Difficulty — 30%"
+# #     )
+
+# #     st.caption(
+# #         "Remaining syllabus — 30%"
+# #     )
+
+# #     st.divider()
+
+# #     st.caption(
+# #         "Built with Streamlit + Hugging Face"
+# #     )
+
+
+# # # ============================================================
+# # # MAIN TABS
+# # # ============================================================
+
+# # tab_setup, tab_plan, tab_priority, tab_ai = st.tabs(
+# #     [
+# #         "⚙️ Setup",
+# #         "📅 Study Plan",
+# #         "🎯 Priority",
+# #         "🤖 AI Assistant"
+# #     ]
+# # )
+
+
+# # # ============================================================
+# # # TAB 1 — SETUP
+# # # ============================================================
+
+# # with tab_setup:
+
+# #     st.markdown(
+# #         '<div class="section-title">👨‍🎓 Student Setup</div>',
+# #         unsafe_allow_html=True
+# #     )
+
+# #     st.markdown(
+# #         '<div class="section-subtitle">'
+# #         'Tell the AI about your subjects and availability.'
+# #         '</div>',
+# #         unsafe_allow_html=True
+# #     )
+
+# #     col1, col2 = st.columns(
+# #         [1, 2]
+# #     )
+
+# #     with col1:
+
+# #         name = st.text_input(
+# #             "Your Name",
+# #             placeholder="e.g. Tanmay",
+# #             key="student_name"
+# #         )
+
+# #     with col2:
+
+# #         subjects_input = st.text_input(
+# #             "Subjects",
+# #             placeholder="DSA, Java, Maths",
+# #             key="subjects_input"
+# #         )
+
+
+# #     # --------------------------------------------------------
+# #     # SUBJECT DATA
+# #     # --------------------------------------------------------
+
+# #     subject_names = [
+# #         subject.strip()
+# #         for subject in subjects_input.split(",")
+# #         if subject.strip()
+# #     ]
+
+
+# #     if subject_names:
 
 # #         st.markdown(
-# #             f"### 📚 {subject}"
+# #             '<div class="section-title">'
+# #             '📚 Subject Priorities'
+# #             '</div>',
+# #             unsafe_allow_html=True
 # #         )
 
-# #         col1, col2 = st.columns(2)
-
-# #         with col1:
-
-# #             exam_date = st.date_input(
-# #                 f"Exam Date — {subject}",
-# #                 value=date.today(),
-# #                 key=f"exam_{subject}"
-# #             )
-
-# #         with col2:
-
-# #             difficulty = st.selectbox(
-# #                 f"Difficulty — {subject}",
-# #                 [
-# #                     "Easy",
-# #                     "Medium",
-# #                     "Hard"
-# #                 ],
-# #                 index=1,
-# #                 key=f"difficulty_{subject}"
-# #             )
-
-# #         progress = st.slider(
-# #             f"Completed Syllabus — {subject}",
-# #             min_value=0,
-# #             max_value=100,
-# #             value=50,
-# #             step=5,
-# #             key=f"progress_{subject}"
+# #         st.caption(
+# #             "Priority is automatically calculated from "
+# #             "exam urgency, difficulty and remaining syllabus."
 # #         )
 
-# #         # ----------------------------------------
-# #         # CALCULATE PRIORITY
-# #         # ----------------------------------------
 
-# #         priority_info = calculate_priority(
-# #             exam_date,
-# #             difficulty,
-# #             progress
-# #         )
-
-# #         subject_data.append({
-
-# #             "subject": subject,
-
-# #             "exam_date": exam_date,
-
-# #             "difficulty": difficulty,
-
-# #             "progress": progress,
-
-# #             "score": priority_info["score"],
-
-# #             "priority": priority_info["priority"],
-
-# #             "exam_score": priority_info["exam_score"],
-
-# #             "difficulty_score":
-# #                 priority_info["difficulty_score"],
-
-# #             "remaining_score":
-# #                 priority_info["remaining_score"]
-
-# #         })
-
-# #         # ----------------------------------------
-# #         # SHOW PRIORITY
-# #         # ----------------------------------------
-
-# #         st.write(
-# #             f"🎯 Priority Score: "
-# #             f"**{priority_info['score']} / 100**"
-# #         )
-
-# #         st.write(
-# #             f"Priority: "
-# #             f"**{priority_info['priority']}**"
-# #         )
-
-# #         st.divider()
+# #         subject_data = []
 
 
-# # # ============================================
-# # # TIME SLOT
-# # # ============================================
+# #         for subject in subject_names:
 
-# # st.subheader(
-# #     "📅 Choose Your Study Time"
-# # )
+# #             with st.container(
+# #                 border=True
+# #             ):
 
-# # start_time = st.time_input(
-# #     "Start Time",
-# #     value=time(18, 0)
-# # )
+# #                 st.markdown(
+# #                     f"### 📖 {subject}"
+# #                 )
 
-# # end_time = st.time_input(
-# #     "End Time",
-# #     value=time(23, 0)
-# # )
+# #                 c1, c2, c3 = st.columns(3)
+
+# #                 with c1:
+
+# #                     exam_date = st.date_input(
+# #                         "Exam Date",
+# #                         value=date.today(),
+# #                         key=f"exam_{subject}"
+# #                     )
+
+# #                 with c2:
+
+# #                     difficulty = st.selectbox(
+# #                         "Difficulty",
+# #                         [
+# #                             "Easy",
+# #                             "Medium",
+# #                             "Hard"
+# #                         ],
+# #                         index=1,
+# #                         key=f"difficulty_{subject}"
+# #                     )
+
+# #                 with c3:
+
+# #                     progress = st.slider(
+# #                         "Syllabus Completed",
+# #                         0,
+# #                         100,
+# #                         50,
+# #                         5,
+# #                         key=f"progress_{subject}"
+# #                     )
 
 
-# # start_minutes = (
-# #     start_time.hour * 60
-# #     + start_time.minute
-# # )
-
-# # end_minutes = (
-# #     end_time.hour * 60
-# #     + end_time.minute
-# # )
+# #                 priority_info = calculate_priority(
+# #                     exam_date,
+# #                     difficulty,
+# #                     progress
+# #                 )
 
 
-# # if end_minutes > start_minutes:
+# #                 subject_data.append({
 
-# #     available_minutes = (
-# #         end_minutes
-# #         - start_minutes
+# #                     "subject": subject,
+
+# #                     "exam_date": exam_date,
+
+# #                     "difficulty": difficulty,
+
+# #                     "progress": progress,
+
+# #                     "score":
+# #                         priority_info["score"],
+
+# #                     "priority":
+# #                         priority_info["priority"],
+
+# #                     "exam_score":
+# #                         priority_info["exam_score"],
+
+# #                     "difficulty_score":
+# #                         priority_info["difficulty_score"],
+
+# #                     "remaining_score":
+# #                         priority_info["remaining_score"]
+
+# #                 })
+
+
+# #                 st.markdown(
+# #                     f"""
+# #                     <div class="info-bar">
+
+# #                         🎯 Priority Score:
+# #                         <b>
+# #                             {priority_info['score']} / 100
+# #                         </b>
+
+# #                         &nbsp;&nbsp;|&nbsp;&nbsp;
+
+# #                         Priority:
+# #                         <b>
+# #                             {priority_info['priority']}
+# #                         </b>
+
+# #                     </div>
+# #                     """,
+# #                     unsafe_allow_html=True
+# #                 )
+
+
+# #     # ========================================================
+# #     # STUDY WINDOW
+# #     # ========================================================
+
+# #     st.markdown(
+# #         '<div class="section-title">'
+# #         '⏰ Your Study Window'
+# #         '</div>',
+# #         unsafe_allow_html=True
 # #     )
 
-# #     available_hours = (
-# #         available_minutes / 60
-# #     )
-
-# #     st.info(
-# #         f"⏱️ Available study time: "
-# #         f"**{available_hours:.1f} hours**"
-# #     )
-
-# # else:
-
-# #     available_minutes = 0
-
-# #     st.error(
-# #         "⚠️ End time must be after "
-# #         "start time."
+# #     st.caption(
+# #         "Choose exactly when you are available today."
 # #     )
 
 
-# # # ============================================
-# # # GENERATE PLAN
-# # # ============================================
+# #     c1, c2 = st.columns(2)
 
-# # if st.button(
-# #     "📚 Generate Study Plan",
-# #     use_container_width=True
-# # ):
+# #     with c1:
 
-# #     if not name:
-
-# #         st.warning(
-# #             "Please enter your name."
+# #         start_time = st.time_input(
+# #             "Start Time",
+# #             value=time(18, 0),
+# #             key="start_time_input"
 # #         )
 
-# #     elif not subject_names:
+# #     with c2:
 
-# #         st.warning(
-# #             "Please enter at least one subject."
+# #         end_time = st.time_input(
+# #             "End Time",
+# #             value=time(23, 0),
+# #             key="end_time_input"
 # #         )
 
-# #     elif available_minutes <= 0:
 
-# #         st.error(
-# #             "Please select a valid study time."
+# #     start_minutes = (
+# #         start_time.hour * 60
+# #         + start_time.minute
+# #     )
+
+# #     end_minutes = (
+# #         end_time.hour * 60
+# #         + end_time.minute
+# #     )
+
+
+# #     if end_minutes > start_minutes:
+
+# #         available_minutes = (
+# #             end_minutes
+# #             - start_minutes
+# #         )
+
+# #         available_hours = (
+# #             available_minutes / 60
+# #         )
+
+# #         st.success(
+# #             f"⏱️ You have **{available_hours:.1f} hours** "
+# #             f"available for studying."
 # #         )
 
 # #     else:
 
-# #         with st.spinner(
-# #             "🧠 AI is creating your "
-# #             "personalized study plan..."
-# #         ):
+# #         available_minutes = 0
 
-# #             plan = generate_study_plan(
-# #                 subject_data,
-# #                 start_time,
-# #                 end_time
-# #             )
-
-# #         # ----------------------------------------
-# #         # SAVE PLAN
-# #         # ----------------------------------------
-
-# #         st.session_state[
-# #             "study_plan"
-# #         ] = plan["markdown"]
-
-# #         st.session_state[
-# #             "study_sessions"
-# #         ] = plan["sessions"]
-
-# #         st.session_state[
-# #             "subject_data"
-# #         ] = subject_data
-
-# #         st.session_state[
-# #             "name"
-# #         ] = name
-
-# #         st.session_state[
-# #             "start_time"
-# #         ] = start_time
-
-# #         st.session_state[
-# #             "end_time"
-# #         ] = end_time
-
-# #         st.session_state[
-# #             "available_minutes"
-# #         ] = available_minutes
-
-# #         # ----------------------------------------
-# #         # CLEAR OLD RESCHEDULE
-# #         # ----------------------------------------
-
-# #         if "rescheduled_plan" in st.session_state:
-
-# #             del st.session_state[
-# #                 "rescheduled_plan"
-# #             ]
-
-# #         # ----------------------------------------
-# #         # CLEAR CHAT
-# #         # ----------------------------------------
-
-# #         st.session_state[
-# #             "chat_history"
-# #         ] = []
+# #         st.error(
+# #             "End time must be after start time."
+# #         )
 
 
-# # # ============================================
-# # # STUDY DASHBOARD
-# # # ============================================
-
-# # if "subject_data" in st.session_state:
-
-# #     st.divider()
-
-# #     show_dashboard(
-# #         st.session_state["subject_data"]
-# #     )
+# #     st.write("")
 
 
-# # # ============================================
-# # # ORIGINAL STUDY PLAN
-# # # ============================================
+# #     # ========================================================
+# #     # GENERATE BUTTON
+# #     # ========================================================
 
-# # if "study_plan" in st.session_state:
-
-# #     st.divider()
-
-# #     st.header(
-# #         f"📅 "
-# #         f"{st.session_state['name']}'s "
-# #         f"Study Plan"
-# #     )
-
-# #     original_hours = (
-# #         st.session_state[
-# #             "available_minutes"
-# #         ] / 60
-# #     )
-
-# #     st.caption(
-# #         f"🕐 Study Slot: "
-# #         f"{st.session_state['start_time'].strftime('%I:%M %p')}"
-# #         f" – "
-# #         f"{st.session_state['end_time'].strftime('%I:%M %p')}"
-# #     )
-
-# #     st.caption(
-# #         f"⏱️ Available Study Time: "
-# #         f"{original_hours:.1f} hours"
-# #     )
-
-# #     # ----------------------------------------
-# #     # SHOW PLAN
-# #     # ----------------------------------------
-
-# #     st.markdown(
-# #         st.session_state[
-# #             "study_plan"
-# #         ]
-# #     )
-
-# #     # ========================================
-# #     # GOOGLE CALENDAR
-# #     # ========================================
-
-# #     st.subheader(
-# #         "📅 Google Calendar"
-# #     )
-
-# #     st.write(
-# #         "Add your generated study plan "
-# #         "directly to Google Calendar."
-# #     )
-
-# #     calendar_date = st.date_input(
-# #         "Study Date",
-# #         value=date.today(),
-# #         key="calendar_date"
-# #     )
-
-# #     if st.button(
-# #         "📅 Add Study Plan to Google Calendar",
+# #     generate = st.button(
+# #         "✨ Generate My Study Plan",
+# #         type="primary",
 # #         use_container_width=True
-# #     ):
+# #     )
 
-# #         try:
 
-# #             events = add_study_plan_to_calendar(
+# #     if generate:
 
-# #                 st.session_state[
-# #                     "study_sessions"
-# #                 ],
+# #         if not name:
 
-# #                 calendar_date,
-
-# #                 st.session_state[
-# #                     "start_time"
-# #                 ]
-
+# #             st.warning(
+# #                 "👤 Please enter your name."
 # #             )
 
-# #             st.success(
-# #                 f"✅ Added {len(events)} "
-# #                 "study sessions to Google Calendar!"
+# #         elif not subject_names:
+
+# #             st.warning(
+# #                 "📚 Please enter at least one subject."
 # #             )
 
-# #         except Exception as e:
+# #         elif available_minutes <= 0:
 
 # #             st.error(
-# #                 f"❌ Google Calendar error: {e}"
+# #                 "⏰ Please select a valid study window."
 # #             )
 
-# #     # ----------------------------------------
-# #     # INFORMATION
-# #     # ----------------------------------------
+# #         else:
 
-# #     st.info(
-# #         "💡 The AI prioritizes subjects using "
-# #         "exam urgency, difficulty, and remaining "
-# #         "syllabus. If your available time is too "
-# #         "short, lower-priority subjects may be "
-# #         "deferred."
-# #     )
+# #             with st.spinner(
+# #                 "🧠 AI is building your personalized plan..."
+# #             ):
+
+# #                 plan = generate_study_plan(
+# #                     subject_data,
+# #                     start_time,
+# #                     end_time
+# #                 )
 
 
-# # # ============================================
-# # # PRIORITY ANALYSIS
-# # # ============================================
+# #             st.session_state[
+# #                 "study_plan"
+# #             ] = plan["markdown"]
 
-# # if "subject_data" in st.session_state:
+# #             st.session_state[
+# #                 "study_sessions"
+# #             ] = plan["sessions"]
 
-# #     st.divider()
+# #             st.session_state[
+# #                 "subject_data"
+# #             ] = subject_data
 
-# #     st.header(
-# #         "🎯 Priority Analysis"
-# #     )
+# #             st.session_state[
+# #                 "name"
+# #             ] = name
 
-# #     st.write(
-# #         "The priority score is calculated using:"
-# #     )
+# #             st.session_state[
+# #                 "start_time"
+# #             ] = start_time
 
-# #     st.markdown(
-# #         """
-# #         **40% Exam Urgency + 30% Difficulty + 30% Remaining Syllabus**
-# #         """
-# #     )
+# #             st.session_state[
+# #                 "end_time"
+# #             ] = end_time
 
-# #     for item in sorted(
-# #         st.session_state["subject_data"],
-# #         key=lambda x: x["score"],
-# #         reverse=True
-# #     ):
+# #             st.session_state[
+# #                 "available_minutes"
+# #             ] = available_minutes
 
-# #         with st.expander(
-# #             f"{item['subject']} — "
-# #             f"{item['priority']} "
-# #             f"({item['score']}/100)"
-# #         ):
+# #             st.session_state[
+# #                 "rescheduled_plan"
+# #             ] = None
 
-# #             st.write(
-# #                 f"📅 Exam Date: "
-# #                 f"{item['exam_date']}"
-# #             )
+# #             st.session_state[
+# #                 "chat_history"
+# #             ] = []
 
-# #             st.write(
-# #                 f"🎯 Difficulty: "
-# #                 f"{item['difficulty']}"
-# #             )
-
-# #             st.write(
-# #                 f"📊 Completed: "
-# #                 f"{item['progress']}%"
-# #             )
-
-# #             st.write(
-# #                 f"⏳ Remaining: "
-# #                 f"{100 - item['progress']}%"
-# #             )
-
-# #             st.write(
-# #                 f"📅 Exam Urgency Score: "
-# #                 f"{item['exam_score']}"
-# #             )
-
-# #             st.write(
-# #                 f"🎯 Difficulty Score: "
-# #                 f"{item['difficulty_score']}"
-# #             )
-
-# #             st.write(
-# #                 f"📚 Remaining Syllabus Score: "
-# #                 f"{item['remaining_score']}"
+# #             st.success(
+# #                 "🎉 Your personalized study plan is ready!"
 # #             )
 
 
-# # # ============================================
-# # # AI RESCHEDULING ASSISTANT
-# # # ============================================
+# # # ============================================================
+# # # TAB 2 — STUDY PLAN
+# # # ============================================================
 
-# # if "study_plan" in st.session_state:
+# # with tab_plan:
 
-# #     st.divider()
+# #     if "study_plan" not in st.session_state:
 
-# #     st.header(
-# #         "🤖 AI Rescheduling Assistant"
-# #     )
+# #         st.info(
+# #             "👋 Generate a study plan from the "
+# #             "**Setup** tab to see it here."
+# #         )
 
-# #     st.write(
-# #         "Something changed? "
-# #         "Tell the AI what happened."
-# #     )
+# #     else:
 
-# #     st.info(
-# #         "Examples:\n\n"
-# #         "• \"I only have 1.5 hours today "
-# #         "because I have an appointment.\"\n\n"
-# #         "• \"I have my DSA exam tomorrow "
-# #         "and only 3 hours to study.\"\n\n"
-# #         "• \"My DSA paper is the next morning "
-# #         "and I've got 2 hours.\"\n\n"
-# #         "• \"I have a DSA test in 2 days "
-# #         "and 4 hours available.\""
-# #     )
+# #         st.markdown(
+# #             '<div class="section-title">'
+# #             f"📅 {st.session_state['name']}'s Study Plan"
+# #             '</div>',
+# #             unsafe_allow_html=True
+# #         )
 
-# #     if "chat_history" not in st.session_state:
 
-# #         st.session_state[
-# #             "chat_history"
-# #         ] = []
+# #         hours = (
+# #             st.session_state[
+# #                 "available_minutes"
+# #             ] / 60
+# #         )
 
-# #     # ----------------------------------------
-# #     # SHOW CHAT HISTORY
-# #     # ----------------------------------------
 
-# #     for message in st.session_state[
-# #         "chat_history"
-# #     ]:
+# #         c1, c2 = st.columns(2)
 
-# #         with st.chat_message(
-# #             message["role"]
+# #         with c1:
+
+# #             st.metric(
+# #                 "Available Study Time",
+# #                 f"{hours:.1f} hrs"
+# #             )
+
+# #         with c2:
+
+# #             st.metric(
+# #                 "Study Window",
+# #                 (
+# #                     st.session_state[
+# #                         "start_time"
+# #                     ].strftime("%I:%M %p")
+# #                     + " – "
+# #                     + st.session_state[
+# #                         "end_time"
+# #                     ].strftime("%I:%M %p")
+# #                 )
+# #             )
+
+
+# #         st.write("")
+
+
+# #         # ----------------------------------------------------
+# #         # PLAN
+# #         # ----------------------------------------------------
+
+# #         with st.container(
+# #             border=True
 # #         ):
 
 # #             st.markdown(
-# #                 message["content"]
-# #             )
-
-# #     # ----------------------------------------
-# #     # CHAT INPUT
-# #     # ----------------------------------------
-
-# #     user_message = st.chat_input(
-# #         "Tell me what changed..."
-# #     )
-
-# #     if user_message:
-
-# #         # Save user message
-
-# #         st.session_state[
-# #             "chat_history"
-# #         ].append({
-
-# #             "role": "user",
-
-# #             "content": user_message
-
-# #         })
-
-# #         with st.chat_message("user"):
-
-# #             st.markdown(
-# #                 user_message
-# #             )
-
-# #         # ------------------------------------
-# #         # RESCHEDULE
-# #         # ------------------------------------
-
-# #         with st.spinner(
-# #             "🧠 Understanding your request "
-# #             "and rescheduling..."
-# #         ):
-
-# #             new_plan = reschedule_plan(
-
 # #                 st.session_state[
-# #                     "subject_data"
-# #                 ],
-
-# #                 user_message,
-
-# #                 st.session_state[
-# #                     "start_time"
+# #                     "study_plan"
 # #                 ]
-
 # #             )
 
-# #         # ------------------------------------
-# #         # SAVE NEW PLAN
-# #         # ------------------------------------
 
-# #         st.session_state[
-# #             "rescheduled_plan"
-# #         ] = new_plan
+# #         # ----------------------------------------------------
+# #         # GOOGLE CALENDAR
+# #         # ----------------------------------------------------
 
-# #         st.session_state[
+# #         st.write("")
+
+# #         st.markdown(
+# #             '<div class="section-title">'
+# #             '📅 Google Calendar'
+# #             '</div>',
+# #             unsafe_allow_html=True
+# #         )
+
+# #         st.caption(
+# #             "Turn your AI-generated schedule into real calendar events."
+# #         )
+
+
+# #         calendar_date = st.date_input(
+# #             "Calendar Date",
+# #             value=date.today(),
+# #             key="calendar_date"
+# #         )
+
+
+# #         if st.button(
+# #             "📅 Add Study Plan to Google Calendar",
+# #             type="primary",
+# #             use_container_width=True
+# #         ):
+
+# #             try:
+
+# #                 events = add_study_plan_to_calendar(
+
+# #                     st.session_state[
+# #                         "study_sessions"
+# #                     ],
+
+# #                     calendar_date,
+
+# #                     st.session_state[
+# #                         "start_time"
+# #                     ]
+
+# #                 )
+
+# #                 st.success(
+# #                     f"✅ Added {len(events)} "
+# #                     "study sessions to Google Calendar!"
+# #                 )
+
+# #             except Exception as e:
+
+# #                 st.error(
+# #                     f"❌ Google Calendar error: {e}"
+# #                 )
+
+
+# # # ============================================================
+# # # TAB 3 — PRIORITY
+# # # ============================================================
+
+# # with tab_priority:
+
+# #     if "subject_data" not in st.session_state:
+
+# #         st.info(
+# #             "Generate a study plan first."
+# #         )
+
+# #     else:
+
+# #         st.markdown(
+# #             '<div class="section-title">'
+# #             '🎯 Smart Priority Analysis'
+# #             '</div>',
+# #             unsafe_allow_html=True
+# #         )
+
+# #         st.markdown(
+# #             """
+# #             Your priority score is calculated using:
+
+# #             **40% Exam Urgency + 30% Difficulty + 
+# #             30% Remaining Syllabus**
+# #             """
+# #         )
+
+
+# #         st.write("")
+
+
+# #         sorted_subjects = sorted(
+# #             st.session_state[
+# #                 "subject_data"
+# #             ],
+# #             key=lambda x: x["score"],
+# #             reverse=True
+# #         )
+
+
+# #         # ----------------------------------------------------
+# #         # PRIORITY CARDS
+# #         # ----------------------------------------------------
+
+# #         cols = st.columns(
+# #             min(
+# #                 len(sorted_subjects),
+# #                 3
+# #             )
+# #         )
+
+
+# #         for index, item in enumerate(
+# #             sorted_subjects
+# #         ):
+
+# #             with cols[
+# #                 index % len(cols)
+# #             ]:
+
+# #                 st.markdown(
+# #                     f"""
+# #                     <div class="priority-card">
+
+# #                         <div class="priority-subject">
+# #                             📚 {item['subject']}
+# #                         </div>
+
+# #                         <div class="priority-score">
+# #                             {item['score']}/100
+# #                         </div>
+
+# #                         <div class="priority-label">
+# #                             {item['priority']} PRIORITY
+# #                         </div>
+
+# #                     </div>
+# #                     """,
+# #                     unsafe_allow_html=True
+# #                 )
+
+
+# #         st.write("")
+
+
+# #         # ----------------------------------------------------
+# #         # DETAILED BREAKDOWN
+# #         # ----------------------------------------------------
+
+# #         for item in sorted_subjects:
+
+# #             with st.expander(
+# #                 f"📖 {item['subject']} — "
+# #                 f"{item['priority']} — "
+# #                 f"{item['score']}/100"
+# #             ):
+
+# #                 c1, c2 = st.columns(2)
+
+# #                 with c1:
+
+# #                     st.write(
+# #                         f"📅 **Exam:** "
+# #                         f"{item['exam_date']}"
+# #                     )
+
+# #                     st.write(
+# #                         f"🎯 **Difficulty:** "
+# #                         f"{item['difficulty']}"
+# #                     )
+
+# #                     st.write(
+# #                         f"📊 **Completed:** "
+# #                         f"{item['progress']}%"
+# #                     )
+
+# #                 with c2:
+
+# #                     st.write(
+# #                         f"📅 **Exam Urgency:** "
+# #                         f"{item['exam_score']}"
+# #                     )
+
+# #                     st.write(
+# #                         f"🎯 **Difficulty Score:** "
+# #                         f"{item['difficulty_score']}"
+# #                     )
+
+# #                     st.write(
+# #                         f"📚 **Remaining Syllabus:** "
+# #                         f"{item['remaining_score']}"
+# #                     )
+
+
+# #         st.info(
+# #             "💡 Higher priority means the AI is more "
+# #             "likely to allocate study time to that subject."
+# #         )
+
+
+# # # ============================================================
+# # # TAB 4 — AI ASSISTANT
+# # # ============================================================
+
+# # with tab_ai:
+
+# #     if "study_plan" not in st.session_state:
+
+# #         st.info(
+# #             "Generate a study plan first, then "
+# #             "you can ask the AI to adapt it."
+# #         )
+
+# #     else:
+
+# #         st.markdown(
+# #             '<div class="section-title">'
+# #             '🤖 AI Rescheduling Assistant'
+# #             '</div>',
+# #             unsafe_allow_html=True
+# #         )
+
+# #         st.markdown(
+# #             '<div class="section-subtitle">'
+# #             'Something changed? Just tell the AI naturally.'
+# #             '</div>',
+# #             unsafe_allow_html=True
+# #         )
+
+
+# #         # ----------------------------------------------------
+# #         # EXAMPLES
+# #         # ----------------------------------------------------
+
+# #         with st.container(
+# #             border=True
+# #         ):
+
+# #             st.markdown(
+# #                 "### 💬 Try saying..."
+# #             )
+
+# #             st.markdown(
+# #                 """
+# #                 • *I only have 2 hours today.*
+
+# #                 • *I have my DSA exam tomorrow and only 
+# #                 3 hours to study.*
+
+# #                 • *My DSA paper is the next morning and 
+# #                 I've got 2 hours.*
+
+# #                 • *I have a DSA test in 2 days and 
+# #                 4 hours available.*
+# #                 """
+# #             )
+
+
+# #         st.write("")
+
+
+# #         # ----------------------------------------------------
+# #         # CHAT HISTORY
+# #         # ----------------------------------------------------
+
+# #         for message in st.session_state[
 # #             "chat_history"
-# #         ].append({
+# #         ]:
 
-# #             "role": "assistant",
+# #             with st.chat_message(
+# #                 message["role"]
+# #             ):
 
-# #             "content":
-# #                 "✅ I've rescheduled your "
-# #                 "plan using your priority "
-# #                 "scores. Your updated plan "
-# #                 "is shown below."
-
-# #         })
-
-# #         st.rerun()
+# #                 st.markdown(
+# #                     message["content"]
+# #                 )
 
 
-# # # ============================================
-# # # RESCHEDULED PLAN
-# # # ============================================
+# #         # ----------------------------------------------------
+# #         # CHAT INPUT
+# #         # ----------------------------------------------------
 
-# # if "rescheduled_plan" in st.session_state:
-
-# #     st.divider()
-
-# #     st.header(
-# #         "🔄 Your Rescheduled Plan"
-# #     )
-
-# #     st.markdown(
-# #         st.session_state[
-# #             "rescheduled_plan"
-# #         ]
-# #     )
+# #         user_message = st.chat_input(
+# #             "Tell me what changed..."
+# #         )
 
 
+# #         if user_message:
 
+# #             st.session_state[
+# #                 "chat_history"
+# #             ].append({
+
+# #                 "role": "user",
+
+# #                 "content": user_message
+
+# #             })
+
+
+# #             with st.chat_message(
+# #                 "user"
+# #             ):
+
+# #                 st.markdown(
+# #                     user_message
+# #                 )
+
+
+# #             with st.chat_message(
+# #                 "assistant"
+# #             ):
+
+# #                 with st.spinner(
+# #                     "🧠 Adapting your plan..."
+# #                 ):
+
+# #                     new_plan = reschedule_plan(
+
+# #                         st.session_state[
+# #                             "subject_data"
+# #                         ],
+
+# #                         user_message,
+
+# #                         st.session_state[
+# #                             "start_time"
+# #                         ]
+
+# #                     )
+
+
+# #                 st.markdown(
+# #                     "✅ I've adapted your study plan."
+# #                 )
+
+
+# #             st.session_state[
+# #                 "rescheduled_plan"
+# #             ] = new_plan
+
+
+# #             st.session_state[
+# #                 "chat_history"
+# #             ].append({
+
+# #                 "role": "assistant",
+
+# #                 "content":
+# #                     "✅ I've adapted your study plan."
+
+# #             })
+
+
+# #             st.rerun()
+
+
+# #         # ----------------------------------------------------
+# #         # RESCHEDULED PLAN
+# #         # ----------------------------------------------------
+
+# #         if (
+# #             st.session_state.get(
+# #                 "rescheduled_plan"
+# #             )
+# #         ):
+
+# #             st.divider()
+
+# #             st.markdown(
+# #                 '<div class="section-title">'
+# #                 '🔄 Your Updated Plan'
+# #                 '</div>',
+# #                 unsafe_allow_html=True
+# #             )
+
+
+# #             with st.container(
+# #                 border=True
+# #             ):
+
+# #                 st.markdown(
+# #                     st.session_state[
+# #                         "rescheduled_plan"
+# #                     ]
+# #                 )
+
+
+# #             st.success(
+# #                 "Your original plan remains available "
+# #                 "in the Study Plan tab."
+# #             )
+
+
+# # # ============================================================
+# # # FOOTER
+# # # ============================================================
+
+# # st.markdown(
+# #     """
+# #     <div class="footer">
+# #         📚 AI Study Assistant &nbsp;•&nbsp;
+# #         Built with Streamlit + Hugging Face &nbsp;•&nbsp;
+# #         Adaptive AI Study Planning
+# #     </div>
+# #     """,
+# #     unsafe_allow_html=True
+# # )
 
 
 
@@ -2488,13 +3626,12 @@
 
 
 # # ============================================================
-# # CUSTOM CSS
+# # SIMPLE CUSTOM CSS
 # # ============================================================
 
-# st.markdown("""
-# <style>
-
-#     /* ---------- MAIN ---------- */
+# st.markdown(
+#     """
+#     <style>
 
 #     .block-container {
 #         max-width: 1200px;
@@ -2502,115 +3639,18 @@
 #         padding-bottom: 4rem;
 #     }
 
-#     /* ---------- HERO ---------- */
-
-#     .hero {
-#         padding: 2.2rem 2.5rem;
-#         border-radius: 24px;
-#         background:
-#             linear-gradient(
-#                 135deg,
-#                 rgba(91, 76, 255, 0.18),
-#                 rgba(30, 30, 40, 0.85)
-#             );
-#         border: 1px solid rgba(255,255,255,0.08);
-#         margin-bottom: 2rem;
-#     }
-
-#     .hero-title {
-#         font-size: 3rem;
+#     h1 {
 #         font-weight: 800;
-#         margin-bottom: 0.3rem;
 #     }
 
-#     .hero-subtitle {
-#         font-size: 1.15rem;
-#         opacity: 0.75;
-#     }
-
-#     /* ---------- SECTION ---------- */
-
-#     .section-title {
-#         font-size: 1.8rem;
-#         font-weight: 750;
-#         margin-top: 1.5rem;
-#         margin-bottom: 0.3rem;
-#     }
-
-#     .section-subtitle {
-#         opacity: 0.65;
-#         margin-bottom: 1.2rem;
-#     }
-
-#     /* ---------- FEATURE CARDS ---------- */
-
-#     .feature-card {
-#         padding: 1.2rem;
-#         border-radius: 18px;
-#         border: 1px solid rgba(255,255,255,0.08);
-#         background: rgba(255,255,255,0.035);
-#         min-height: 120px;
-#     }
-
-#     .feature-icon {
-#         font-size: 1.8rem;
-#     }
-
-#     .feature-title {
+#     h2, h3 {
 #         font-weight: 700;
-#         margin-top: 0.4rem;
 #     }
 
-#     .feature-text {
-#         opacity: 0.65;
-#         font-size: 0.9rem;
-#     }
-
-#     /* ---------- PRIORITY CARDS ---------- */
-
-#     .priority-card {
-#         padding: 1.2rem;
-#         border-radius: 18px;
-#         border: 1px solid rgba(255,255,255,0.08);
-#         background: rgba(255,255,255,0.035);
-#     }
-
-#     .priority-subject {
-#         font-size: 1.15rem;
-#         font-weight: 750;
-#     }
-
-#     .priority-score {
-#         font-size: 1.8rem;
-#         font-weight: 800;
-#     }
-
-#     .priority-label {
-#         font-size: 0.85rem;
-#         opacity: 0.7;
-#     }
-
-#     /* ---------- INFO BAR ---------- */
-
-#     .info-bar {
-#         padding: 1rem 1.2rem;
-#         border-radius: 14px;
-#         background: rgba(255,255,255,0.04);
-#         border: 1px solid rgba(255,255,255,0.07);
-#         margin: 1rem 0;
-#     }
-
-#     /* ---------- FOOTER ---------- */
-
-#     .footer {
-#         text-align: center;
-#         opacity: 0.45;
-#         padding-top: 3rem;
-#         font-size: 0.85rem;
-#     }
-
-# </style>
-# """, unsafe_allow_html=True)
+#     </style>
+#     """,
+#     unsafe_allow_html=True
+# )
 
 
 # # ============================================================
@@ -2620,88 +3660,80 @@
 # if "chat_history" not in st.session_state:
 #     st.session_state["chat_history"] = []
 
+# if "study_plan" not in st.session_state:
+#     st.session_state["study_plan"] = None
 
-# # ============================================================
-# # HERO
-# # ============================================================
+# if "study_sessions" not in st.session_state:
+#     st.session_state["study_sessions"] = None
 
-# st.markdown("""
-# <div class="hero">
+# if "subject_data" not in st.session_state:
+#     st.session_state["subject_data"] = None
 
-#     <div class="hero-title">
-#         📚 AI Study Assistant
-#     </div>
-
-#     <div class="hero-subtitle">
-#         Your personal AI-powered adaptive study planner
-#     </div>
-
-# </div>
-# """, unsafe_allow_html=True)
+# if "rescheduled_plan" not in st.session_state:
+#     st.session_state["rescheduled_plan"] = None
 
 
 # # ============================================================
-# # FEATURES
+# # HEADER
 # # ============================================================
 
-# feature_cols = st.columns(4)
+# st.title("📚 AI Study Assistant")
 
-# features = [
-#     (
-#         "🤖",
-#         "AI Planning",
-#         "Personalized study schedules"
-#     ),
-#     (
-#         "🎯",
-#         "Smart Priority",
-#         "Exam + difficulty + progress"
-#     ),
-#     (
-#         "🔄",
-#         "Adaptive",
-#         "Automatically reschedule plans"
-#     ),
-#     (
-#         "📅",
-#         "Calendar",
-#         "Add your plan to Google Calendar"
+# st.caption(
+#     "Your personal AI-powered adaptive study planner"
+# )
+
+# st.write(
+#     "Plan smarter, adapt instantly, and stay on track with AI."
+# )
+
+
+# # ============================================================
+# # FEATURE OVERVIEW
+# # ============================================================
+
+# st.subheader("✨ What your assistant can do")
+
+# feature1, feature2, feature3, feature4 = st.columns(4)
+
+# with feature1:
+#     st.metric(
+#         "🤖 AI Planning",
+#         "Personalized"
 #     )
-# ]
+#     st.caption(
+#         "Creates study plans based on your subjects and time."
+#     )
+
+# with feature2:
+#     st.metric(
+#         "🎯 Smart Priority",
+#         "AI-ranked"
+#     )
+#     st.caption(
+#         "Uses exams, difficulty and syllabus progress."
+#     )
+
+# with feature3:
+#     st.metric(
+#         "🔄 Adaptive",
+#         "Rescheduling"
+#     )
+#     st.caption(
+#         "Adjusts your plan when your availability changes."
+#     )
+
+# with feature4:
+#     st.metric(
+#         "📅 Calendar",
+#         "Google"
+#     )
+#     st.caption(
+#         "Adds your study sessions directly to Calendar."
+#     )
 
 
-# for col, feature in zip(
-#     feature_cols,
-#     features
-# ):
-
-#     icon, title, description = feature
-
-#     with col:
-
-#         st.markdown(
-#             f"""
-#             <div class="feature-card">
-
-#                 <div class="feature-icon">
-#                     {icon}
-#                 </div>
-
-#                 <div class="feature-title">
-#                     {title}
-#                 </div>
-
-#                 <div class="feature-text">
-#                     {description}
-#                 </div>
-
-#             </div>
-#             """,
-#             unsafe_allow_html=True
-#         )
-
-
-# st.write("")
+# st.divider()
 
 
 # # ============================================================
@@ -2710,9 +3742,7 @@
 
 # with st.sidebar:
 
-#     st.markdown(
-#         "## 📚 AI Study Assistant"
-#     )
+#     st.title("📚 AI Study Assistant")
 
 #     st.caption(
 #         "Adaptive learning companion"
@@ -2720,7 +3750,7 @@
 
 #     st.divider()
 
-#     st.markdown("### How it works")
+#     st.subheader("How it works")
 
 #     st.markdown(
 #         """
@@ -2728,32 +3758,32 @@
 
 #         **2. Set exam dates**
 
-#         **3. Set difficulty**
+#         **3. Choose difficulty**
 
-#         **4. Set syllabus progress**
+#         **4. Add syllabus progress**
 
-#         **5. Choose your study time**
+#         **5. Choose your study window**
 
-#         **6. Let AI build your plan**
+#         **6. Generate your plan**
 
-#         **7. Reschedule naturally when plans change**
+#         **7. Reschedule naturally when needed**
 #         """
 #     )
 
 #     st.divider()
 
-#     st.markdown("### 🧠 Priority Formula")
+#     st.subheader("🧠 Priority Formula")
 
-#     st.caption(
-#         "Exam urgency — 40%"
+#     st.write(
+#         "📅 Exam urgency — **40%**"
 #     )
 
-#     st.caption(
-#         "Difficulty — 30%"
+#     st.write(
+#         "🎯 Difficulty — **30%**"
 #     )
 
-#     st.caption(
-#         "Remaining syllabus — 30%"
+#     st.write(
+#         "📚 Remaining syllabus — **30%**"
 #     )
 
 #     st.divider()
@@ -2764,10 +3794,10 @@
 
 
 # # ============================================================
-# # MAIN TABS
+# # TABS
 # # ============================================================
 
-# tab_setup, tab_plan, tab_priority, tab_ai = st.tabs(
+# setup_tab, plan_tab, priority_tab, ai_tab = st.tabs(
 #     [
 #         "⚙️ Setup",
 #         "📅 Study Plan",
@@ -2778,22 +3808,21 @@
 
 
 # # ============================================================
-# # TAB 1 — SETUP
+# # SETUP TAB
 # # ============================================================
 
-# with tab_setup:
+# with setup_tab:
 
-#     st.markdown(
-#         '<div class="section-title">👨‍🎓 Student Setup</div>',
-#         unsafe_allow_html=True
+#     st.header("👨‍🎓 Student Setup")
+
+#     st.write(
+#         "Enter your subjects, exam information and available study time."
 #     )
 
-#     st.markdown(
-#         '<div class="section-subtitle">'
-#         'Tell the AI about your subjects and availability.'
-#         '</div>',
-#         unsafe_allow_html=True
-#     )
+
+#     # --------------------------------------------------------
+#     # STUDENT INFORMATION
+#     # --------------------------------------------------------
 
 #     col1, col2 = st.columns(
 #         [1, 2]
@@ -2803,42 +3832,45 @@
 
 #         name = st.text_input(
 #             "Your Name",
-#             placeholder="e.g. Tanmay",
-#             key="student_name"
+#             placeholder="e.g. Tanmay"
 #         )
 
 #     with col2:
 
 #         subjects_input = st.text_input(
 #             "Subjects",
-#             placeholder="DSA, Java, Maths",
-#             key="subjects_input"
+#             placeholder="DSA, Java, Maths"
 #         )
 
 
 #     # --------------------------------------------------------
-#     # SUBJECT DATA
+#     # SUBJECT LIST
 #     # --------------------------------------------------------
 
 #     subject_names = [
+
 #         subject.strip()
+
 #         for subject in subjects_input.split(",")
+
 #         if subject.strip()
+
 #     ]
 
 
+#     # --------------------------------------------------------
+#     # SUBJECT INFORMATION
+#     # --------------------------------------------------------
+
 #     if subject_names:
 
-#         st.markdown(
-#             '<div class="section-title">'
-#             '📚 Subject Priorities'
-#             '</div>',
-#             unsafe_allow_html=True
+#         st.subheader(
+#             "📚 Subject Information"
 #         )
 
 #         st.caption(
-#             "Priority is automatically calculated from "
-#             "exam urgency, difficulty and remaining syllabus."
+#             "Set the exam date, difficulty and syllabus progress "
+#             "for each subject."
 #         )
 
 
@@ -2851,13 +3883,15 @@
 #                 border=True
 #             ):
 
-#                 st.markdown(
-#                     f"### 📖 {subject}"
+#                 st.subheader(
+#                     f"📖 {subject}"
 #                 )
 
-#                 c1, c2, c3 = st.columns(3)
 
-#                 with c1:
+#                 col1, col2, col3 = st.columns(3)
+
+
+#                 with col1:
 
 #                     exam_date = st.date_input(
 #                         "Exam Date",
@@ -2865,7 +3899,8 @@
 #                         key=f"exam_{subject}"
 #                     )
 
-#                 with c2:
+
+#                 with col2:
 
 #                     difficulty = st.selectbox(
 #                         "Difficulty",
@@ -2878,34 +3913,47 @@
 #                         key=f"difficulty_{subject}"
 #                     )
 
-#                 with c3:
+
+#                 with col3:
 
 #                     progress = st.slider(
 #                         "Syllabus Completed",
-#                         0,
-#                         100,
-#                         50,
-#                         5,
+#                         min_value=0,
+#                         max_value=100,
+#                         value=50,
+#                         step=5,
 #                         key=f"progress_{subject}"
 #                     )
 
 
+#                 # --------------------------------------------
+#                 # PRIORITY
+#                 # --------------------------------------------
+
 #                 priority_info = calculate_priority(
+
 #                     exam_date,
+
 #                     difficulty,
+
 #                     progress
+
 #                 )
 
 
 #                 subject_data.append({
 
-#                     "subject": subject,
+#                     "subject":
+#                         subject,
 
-#                     "exam_date": exam_date,
+#                     "exam_date":
+#                         exam_date,
 
-#                     "difficulty": difficulty,
+#                     "difficulty":
+#                         difficulty,
 
-#                     "progress": progress,
+#                     "progress":
+#                         progress,
 
 #                     "score":
 #                         priority_info["score"],
@@ -2925,114 +3973,128 @@
 #                 })
 
 
-#                 st.markdown(
-#                     f"""
-#                     <div class="info-bar">
-
-#                         🎯 Priority Score:
-#                         <b>
-#                             {priority_info['score']} / 100
-#                         </b>
-
-#                         &nbsp;&nbsp;|&nbsp;&nbsp;
-
-#                         Priority:
-#                         <b>
-#                             {priority_info['priority']}
-#                         </b>
-
-#                     </div>
-#                     """,
-#                     unsafe_allow_html=True
-#                 )
+#                 priority_col1, priority_col2 = st.columns(2)
 
 
-#     # ========================================================
+#                 with priority_col1:
+
+#                     st.metric(
+#                         "Priority Score",
+#                         f"{priority_info['score']} / 100"
+#                     )
+
+
+#                 with priority_col2:
+
+#                     st.metric(
+#                         "Priority",
+#                         priority_info["priority"]
+#                     )
+
+
+#     # --------------------------------------------------------
 #     # STUDY WINDOW
-#     # ========================================================
+#     # --------------------------------------------------------
 
-#     st.markdown(
-#         '<div class="section-title">'
-#         '⏰ Your Study Window'
-#         '</div>',
-#         unsafe_allow_html=True
+#     st.divider()
+
+#     st.header(
+#         "⏰ Choose Your Study Window"
 #     )
 
-#     st.caption(
-#         "Choose exactly when you are available today."
+#     st.write(
+#         "Select exactly when you are available today."
 #     )
 
 
-#     c1, c2 = st.columns(2)
+#     time_col1, time_col2 = st.columns(2)
 
-#     with c1:
+
+#     with time_col1:
 
 #         start_time = st.time_input(
 #             "Start Time",
-#             value=time(18, 0),
-#             key="start_time_input"
+#             value=time(18, 0)
 #         )
 
-#     with c2:
+
+#     with time_col2:
 
 #         end_time = st.time_input(
 #             "End Time",
-#             value=time(23, 0),
-#             key="end_time_input"
+#             value=time(23, 0)
 #         )
 
 
 #     start_minutes = (
+
 #         start_time.hour * 60
+
 #         + start_time.minute
+
 #     )
 
+
 #     end_minutes = (
+
 #         end_time.hour * 60
+
 #         + end_time.minute
+
 #     )
 
 
 #     if end_minutes > start_minutes:
 
 #         available_minutes = (
+
 #             end_minutes
+
 #             - start_minutes
+
 #         )
+
 
 #         available_hours = (
+
 #             available_minutes / 60
+
 #         )
 
+
 #         st.success(
-#             f"⏱️ You have **{available_hours:.1f} hours** "
-#             f"available for studying."
+
+#             f"⏱️ Available study time: "
+#             f"**{available_hours:.1f} hours**"
+
 #         )
+
 
 #     else:
 
 #         available_minutes = 0
 
+
 #         st.error(
-#             "End time must be after start time."
+#             "⚠️ End time must be after start time."
 #         )
 
+
+#     # --------------------------------------------------------
+#     # GENERATE BUTTON
+#     # --------------------------------------------------------
 
 #     st.write("")
 
 
-#     # ========================================================
-#     # GENERATE BUTTON
-#     # ========================================================
-
-#     generate = st.button(
+#     generate_button = st.button(
 #         "✨ Generate My Study Plan",
 #         type="primary",
 #         use_container_width=True
 #     )
 
 
-#     if generate:
+#     if generate_button:
 
 #         if not name:
 
@@ -3040,11 +4102,13 @@
 #                 "👤 Please enter your name."
 #             )
 
+
 #         elif not subject_names:
 
 #             st.warning(
 #                 "📚 Please enter at least one subject."
 #             )
+
 
 #         elif available_minutes <= 0:
 
@@ -3052,54 +4116,76 @@
 #                 "⏰ Please select a valid study window."
 #             )
 
+
 #         else:
 
 #             with st.spinner(
-#                 "🧠 AI is building your personalized plan..."
+#                 "🧠 AI is creating your personalized study plan..."
 #             ):
 
 #                 plan = generate_study_plan(
+
 #                     subject_data,
+
 #                     start_time,
+
 #                     end_time
+
 #                 )
 
+
+#             # --------------------------------------------
+#             # SAVE PLAN
+#             # --------------------------------------------
 
 #             st.session_state[
 #                 "study_plan"
 #             ] = plan["markdown"]
 
+
 #             st.session_state[
 #                 "study_sessions"
 #             ] = plan["sessions"]
+
 
 #             st.session_state[
 #                 "subject_data"
 #             ] = subject_data
 
+
 #             st.session_state[
 #                 "name"
 #             ] = name
+
 
 #             st.session_state[
 #                 "start_time"
 #             ] = start_time
 
+
 #             st.session_state[
 #                 "end_time"
 #             ] = end_time
+
 
 #             st.session_state[
 #                 "available_minutes"
 #             ] = available_minutes
 
+
+#             # --------------------------------------------
+#             # CLEAR OLD DATA
+#             # --------------------------------------------
+
 #             st.session_state[
 #                 "rescheduled_plan"
 #             ] = None
 
+
 #             st.session_state[
 #                 "chat_history"
 #             ] = []
+
 
 #             st.success(
 #                 "🎉 Your personalized study plan is ready!"
@@ -3107,12 +4193,12 @@
 
 
 # # ============================================================
-# # TAB 2 — STUDY PLAN
+# # STUDY PLAN TAB
 # # ============================================================
 
-# with tab_plan:
+# with plan_tab:
 
-#     if "study_plan" not in st.session_state:
+#     if not st.session_state["study_plan"]:
 
 #         st.info(
 #             "👋 Generate a study plan from the "
@@ -3121,39 +4207,59 @@
 
 #     else:
 
-#         st.markdown(
-#             '<div class="section-title">'
+#         st.header(
 #             f"📅 {st.session_state['name']}'s Study Plan"
-#             '</div>',
-#             unsafe_allow_html=True
 #         )
 
 
-#         hours = (
+#         # ----------------------------------------------------
+#         # SUMMARY METRICS
+#         # ----------------------------------------------------
+
+#         available_hours = (
+
 #             st.session_state[
 #                 "available_minutes"
 #             ] / 60
+
 #         )
 
 
-#         c1, c2 = st.columns(2)
+#         col1, col2, col3 = st.columns(3)
 
-#         with c1:
+
+#         with col1:
 
 #             st.metric(
-#                 "Available Study Time",
-#                 f"{hours:.1f} hrs"
+#                 "⏱️ Study Time",
+#                 f"{available_hours:.1f} hrs"
 #             )
 
-#         with c2:
+
+#         with col2:
 
 #             st.metric(
-#                 "Study Window",
+#                 "📚 Subjects",
+#                 len(
+#                     st.session_state[
+#                         "subject_data"
+#                     ]
+#                 )
+#             )
+
+
+#         with col3:
+
+#             st.metric(
+#                 "🕐 Study Window",
+
 #                 (
 #                     st.session_state[
 #                         "start_time"
 #                     ].strftime("%I:%M %p")
+
 #                     + " – "
+
 #                     + st.session_state[
 #                         "end_time"
 #                     ].strftime("%I:%M %p")
@@ -3165,7 +4271,7 @@
 
 
 #         # ----------------------------------------------------
-#         # PLAN
+#         # STUDY PLAN
 #         # ----------------------------------------------------
 
 #         with st.container(
@@ -3179,26 +4285,24 @@
 #             )
 
 
+#         st.divider()
+
+
 #         # ----------------------------------------------------
 #         # GOOGLE CALENDAR
 #         # ----------------------------------------------------
 
-#         st.write("")
-
-#         st.markdown(
-#             '<div class="section-title">'
-#             '📅 Google Calendar'
-#             '</div>',
-#             unsafe_allow_html=True
+#         st.header(
+#             "📅 Google Calendar"
 #         )
 
 #         st.caption(
-#             "Turn your AI-generated schedule into real calendar events."
+#             "Turn your AI-generated study plan into real calendar events."
 #         )
 
 
 #         calendar_date = st.date_input(
-#             "Calendar Date",
+#             "Study Date",
 #             value=date.today(),
 #             key="calendar_date"
 #         )
@@ -3226,10 +4330,14 @@
 
 #                 )
 
+
 #                 st.success(
+
 #                     f"✅ Added {len(events)} "
-#                     "study sessions to Google Calendar!"
+#                     f"study sessions to Google Calendar!"
+
 #                 )
+
 
 #             except Exception as e:
 
@@ -3238,46 +4346,82 @@
 #                 )
 
 
+#         st.info(
+#             "💡 Your AI plan uses exam urgency, "
+#             "difficulty and remaining syllabus to "
+#             "decide what deserves more study time."
+#         )
+
+
 # # ============================================================
-# # TAB 3 — PRIORITY
+# # PRIORITY TAB
 # # ============================================================
 
-# with tab_priority:
+# with priority_tab:
 
-#     if "subject_data" not in st.session_state:
+#     if not st.session_state["subject_data"]:
 
 #         st.info(
-#             "Generate a study plan first."
+#             "Generate a study plan first to see "
+#             "your priority analysis."
 #         )
 
 #     else:
 
-#         st.markdown(
-#             '<div class="section-title">'
-#             '🎯 Smart Priority Analysis'
-#             '</div>',
-#             unsafe_allow_html=True
-#         )
-
-#         st.markdown(
-#             """
-#             Your priority score is calculated using:
-
-#             **40% Exam Urgency + 30% Difficulty + 
-#             30% Remaining Syllabus**
-#             """
+#         st.header(
+#             "🎯 Smart Priority Analysis"
 #         )
 
 
-#         st.write("")
+#         st.write(
+#             "The assistant calculates subject priority using:"
+#         )
 
+
+#         formula_col1, formula_col2, formula_col3 = st.columns(3)
+
+
+#         with formula_col1:
+
+#             st.metric(
+#                 "📅 Exam Urgency",
+#                 "40%"
+#             )
+
+
+#         with formula_col2:
+
+#             st.metric(
+#                 "🎯 Difficulty",
+#                 "30%"
+#             )
+
+
+#         with formula_col3:
+
+#             st.metric(
+#                 "📚 Remaining Syllabus",
+#                 "30%"
+#             )
+
+
+#         st.divider()
+
+
+#         # ----------------------------------------------------
+#         # SORT SUBJECTS
+#         # ----------------------------------------------------
 
 #         sorted_subjects = sorted(
+
 #             st.session_state[
 #                 "subject_data"
 #             ],
+
 #             key=lambda x: x["score"],
+
 #             reverse=True
+
 #         )
 
 
@@ -3285,11 +4429,14 @@
 #         # PRIORITY CARDS
 #         # ----------------------------------------------------
 
-#         cols = st.columns(
-#             min(
-#                 len(sorted_subjects),
-#                 3
-#             )
+#         number_of_columns = min(
+#             len(sorted_subjects),
+#             3
+#         )
+
+
+#         priority_columns = st.columns(
+#             number_of_columns
 #         )
 
 
@@ -3297,53 +4444,57 @@
 #             sorted_subjects
 #         ):
 
-#             with cols[
-#                 index % len(cols)
+#             with priority_columns[
+#                 index % number_of_columns
 #             ]:
 
-#                 st.markdown(
-#                     f"""
-#                     <div class="priority-card">
+#                 with st.container(
+#                     border=True
+#                 ):
 
-#                         <div class="priority-subject">
-#                             📚 {item['subject']}
-#                         </div>
+#                     st.subheader(
+#                         f"📚 {item['subject']}"
+#                     )
 
-#                         <div class="priority-score">
-#                             {item['score']}/100
-#                         </div>
+#                     st.metric(
+#                         "Priority Score",
+#                         f"{item['score']}/100"
+#                     )
 
-#                         <div class="priority-label">
-#                             {item['priority']} PRIORITY
-#                         </div>
-
-#                     </div>
-#                     """,
-#                     unsafe_allow_html=True
-#                 )
+#                     st.write(
+#                         f"**{item['priority']} Priority**"
+#                     )
 
 
-#         st.write("")
+#         st.divider()
 
 
 #         # ----------------------------------------------------
-#         # DETAILED BREAKDOWN
+#         # DETAILED ANALYSIS
 #         # ----------------------------------------------------
+
+#         st.subheader(
+#             "🔍 Detailed Breakdown"
+#         )
+
 
 #         for item in sorted_subjects:
 
 #             with st.expander(
+
 #                 f"📖 {item['subject']} — "
 #                 f"{item['priority']} — "
 #                 f"{item['score']}/100"
+
 #             ):
 
-#                 c1, c2 = st.columns(2)
+#                 col1, col2 = st.columns(2)
 
-#                 with c1:
+
+#                 with col1:
 
 #                     st.write(
-#                         f"📅 **Exam:** "
+#                         f"📅 **Exam Date:** "
 #                         f"{item['exam_date']}"
 #                     )
 
@@ -3353,14 +4504,15 @@
 #                     )
 
 #                     st.write(
-#                         f"📊 **Completed:** "
+#                         f"📊 **Syllabus Completed:** "
 #                         f"{item['progress']}%"
 #                     )
 
-#                 with c2:
+
+#                 with col2:
 
 #                     st.write(
-#                         f"📅 **Exam Urgency:** "
+#                         f"📅 **Exam Urgency Score:** "
 #                         f"{item['exam_score']}"
 #                     )
 
@@ -3370,44 +4522,40 @@
 #                     )
 
 #                     st.write(
-#                         f"📚 **Remaining Syllabus:** "
+#                         f"📚 **Remaining Syllabus Score:** "
 #                         f"{item['remaining_score']}"
 #                     )
 
 
-#         st.info(
-#             "💡 Higher priority means the AI is more "
-#             "likely to allocate study time to that subject."
+#         st.success(
+#             "💡 Higher priority subjects receive "
+#             "more attention when study time is limited."
 #         )
 
 
 # # ============================================================
-# # TAB 4 — AI ASSISTANT
+# # AI ASSISTANT TAB
 # # ============================================================
 
-# with tab_ai:
+# with ai_tab:
 
-#     if "study_plan" not in st.session_state:
+#     if not st.session_state["study_plan"]:
 
 #         st.info(
-#             "Generate a study plan first, then "
-#             "you can ask the AI to adapt it."
+#             "Generate a study plan first. "
+#             "Then you can ask the AI to adapt it."
 #         )
 
 #     else:
 
-#         st.markdown(
-#             '<div class="section-title">'
-#             '🤖 AI Rescheduling Assistant'
-#             '</div>',
-#             unsafe_allow_html=True
+#         st.header(
+#             "🤖 AI Rescheduling Assistant"
 #         )
 
-#         st.markdown(
-#             '<div class="section-subtitle">'
-#             'Something changed? Just tell the AI naturally.'
-#             '</div>',
-#             unsafe_allow_html=True
+
+#         st.write(
+#             "Something changed? Tell the AI naturally "
+#             "and it will adapt your study plan."
 #         )
 
 
@@ -3419,23 +4567,27 @@
 #             border=True
 #         ):
 
-#             st.markdown(
-#                 "### 💬 Try saying..."
+#             st.subheader(
+#                 "💬 Try saying..."
 #             )
 
-#             st.markdown(
-#                 """
-#                 • *I only have 2 hours today.*
+#             st.write(
+#                 "• I only have 2 hours today."
+#             )
 
-#                 • *I have my DSA exam tomorrow and only 
-#                 3 hours to study.*
+#             st.write(
+#                 "• I have my DSA exam tomorrow "
+#                 "and only 3 hours to study."
+#             )
 
-#                 • *My DSA paper is the next morning and 
-#                 I've got 2 hours.*
+#             st.write(
+#                 "• My DSA paper is the next morning "
+#                 "and I've got 2 hours."
+#             )
 
-#                 • *I have a DSA test in 2 days and 
-#                 4 hours available.*
-#                 """
+#             st.write(
+#                 "• I have a DSA test in 2 days "
+#                 "and 4 hours available."
 #             )
 
 
@@ -3470,6 +4622,10 @@
 
 #         if user_message:
 
+#             # -----------------------------------------------
+#             # USER MESSAGE
+#             # -----------------------------------------------
+
 #             st.session_state[
 #                 "chat_history"
 #             ].append({
@@ -3490,12 +4646,16 @@
 #                 )
 
 
+#             # -----------------------------------------------
+#             # AI RESPONSE
+#             # -----------------------------------------------
+
 #             with st.chat_message(
 #                 "assistant"
 #             ):
 
 #                 with st.spinner(
-#                     "🧠 Adapting your plan..."
+#                     "🧠 Understanding your request..."
 #                 ):
 
 #                     new_plan = reschedule_plan(
@@ -3517,6 +4677,10 @@
 #                     "✅ I've adapted your study plan."
 #                 )
 
+
+#             # -----------------------------------------------
+#             # SAVE
+#             # -----------------------------------------------
 
 #             st.session_state[
 #                 "rescheduled_plan"
@@ -3542,19 +4706,15 @@
 #         # RESCHEDULED PLAN
 #         # ----------------------------------------------------
 
-#         if (
-#             st.session_state.get(
-#                 "rescheduled_plan"
-#             )
-#         ):
+#         if st.session_state[
+#             "rescheduled_plan"
+#         ]:
 
 #             st.divider()
 
-#             st.markdown(
-#                 '<div class="section-title">'
-#                 '🔄 Your Updated Plan'
-#                 '</div>',
-#                 unsafe_allow_html=True
+
+#             st.header(
+#                 "🔄 Your Updated Plan"
 #             )
 
 
@@ -3570,25 +4730,58 @@
 
 
 #             st.success(
-#                 "Your original plan remains available "
+#                 "Your original plan is still available "
 #                 "in the Study Plan tab."
 #             )
+
+
+# # ============================================================
+# # DASHBOARD
+# # ============================================================
+
+# if st.session_state["subject_data"]:
+
+#     st.divider()
+
+#     with st.expander(
+#         "📊 Open Detailed Dashboard",
+#         expanded=False
+#     ):
+
+#         show_dashboard(
+#             st.session_state[
+#                 "subject_data"
+#             ]
+#         )
 
 
 # # ============================================================
 # # FOOTER
 # # ============================================================
 
-# st.markdown(
-#     """
-#     <div class="footer">
-#         📚 AI Study Assistant &nbsp;•&nbsp;
-#         Built with Streamlit + Hugging Face &nbsp;•&nbsp;
-#         Adaptive AI Study Planning
-#     </div>
-#     """,
-#     unsafe_allow_html=True
+# st.divider()
+
+# st.caption(
+#     "📚 AI Study Assistant • "
+#     "Built with Streamlit + Hugging Face • "
+#     "Adaptive AI Study Planning"
 # )
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -3626,25 +4819,43 @@ st.set_page_config(
 
 
 # ============================================================
-# SIMPLE CUSTOM CSS
+# CUSTOM CSS
 # ============================================================
 
 st.markdown(
     """
     <style>
 
+    /* Main content */
     .block-container {
-        max-width: 1200px;
+        max-width: 1150px;
         padding-top: 2rem;
-        padding-bottom: 4rem;
+        padding-bottom: 3rem;
     }
 
+    /* Main title */
     h1 {
+        font-size: 2.6rem;
         font-weight: 800;
     }
 
-    h2, h3 {
+    h2 {
+        font-weight: 750;
+    }
+
+    h3 {
         font-weight: 700;
+    }
+
+    /* Small spacing */
+    .small-gap {
+        margin-top: 8px;
+        margin-bottom: 8px;
+    }
+
+    /* Hide unnecessary decoration */
+    footer {
+        visibility: hidden;
     }
 
     </style>
@@ -3684,12 +4895,13 @@ st.caption(
 )
 
 st.write(
-    "Plan smarter, adapt instantly, and stay on track with AI."
+    "Create a personalized study plan, understand your priorities, "
+    "adapt when plans change, and sync your schedule with Google Calendar."
 )
 
 
 # ============================================================
-# FEATURE OVERVIEW
+# QUICK FEATURES
 # ============================================================
 
 st.subheader("✨ What your assistant can do")
@@ -3697,40 +4909,36 @@ st.subheader("✨ What your assistant can do")
 feature1, feature2, feature3, feature4 = st.columns(4)
 
 with feature1:
-    st.metric(
-        "🤖 AI Planning",
-        "Personalized"
-    )
-    st.caption(
-        "Creates study plans based on your subjects and time."
-    )
+    with st.container(border=True):
+        st.markdown("### 🤖")
+        st.write("**AI Planning**")
+        st.caption(
+            "Creates a personalized study schedule."
+        )
 
 with feature2:
-    st.metric(
-        "🎯 Smart Priority",
-        "AI-ranked"
-    )
-    st.caption(
-        "Uses exams, difficulty and syllabus progress."
-    )
+    with st.container(border=True):
+        st.markdown("### 🎯")
+        st.write("**Smart Priority**")
+        st.caption(
+            "Ranks subjects using exam urgency and progress."
+        )
 
 with feature3:
-    st.metric(
-        "🔄 Adaptive",
-        "Rescheduling"
-    )
-    st.caption(
-        "Adjusts your plan when your availability changes."
-    )
+    with st.container(border=True):
+        st.markdown("### 🔄")
+        st.write("**Rescheduling**")
+        st.caption(
+            "Adapts your plan when your time changes."
+        )
 
 with feature4:
-    st.metric(
-        "📅 Calendar",
-        "Google"
-    )
-    st.caption(
-        "Adds your study sessions directly to Calendar."
-    )
+    with st.container(border=True):
+        st.markdown("### 📅")
+        st.write("**Google Calendar**")
+        st.caption(
+            "Adds your study sessions to Calendar."
+        )
 
 
 st.divider()
@@ -3742,10 +4950,10 @@ st.divider()
 
 with st.sidebar:
 
-    st.title("📚 AI Study Assistant")
+    st.title("📚 Study Assistant")
 
     st.caption(
-        "Adaptive learning companion"
+        "Adaptive AI learning companion"
     )
 
     st.divider()
@@ -3754,25 +4962,25 @@ with st.sidebar:
 
     st.markdown(
         """
-        **1. Add your subjects**
+        **1.** Add your subjects
 
-        **2. Set exam dates**
+        **2.** Enter exam dates
 
-        **3. Choose difficulty**
+        **3.** Set difficulty
 
-        **4. Add syllabus progress**
+        **4.** Add syllabus progress
 
-        **5. Choose your study window**
+        **5.** Choose your study window
 
-        **6. Generate your plan**
+        **6.** Generate your plan
 
-        **7. Reschedule naturally when needed**
+        **7.** Reschedule whenever needed
         """
     )
 
     st.divider()
 
-    st.subheader("🧠 Priority Formula")
+    st.subheader("🎯 Priority Formula")
 
     st.write(
         "📅 Exam urgency — **40%**"
@@ -3815,25 +5023,27 @@ with setup_tab:
 
     st.header("👨‍🎓 Student Setup")
 
-    st.write(
-        "Enter your subjects, exam information and available study time."
+    st.caption(
+        "Enter your subjects and tell the assistant how much time you have."
     )
 
 
     # --------------------------------------------------------
-    # STUDENT INFORMATION
+    # BASIC INFORMATION
     # --------------------------------------------------------
 
     col1, col2 = st.columns(
         [1, 2]
     )
 
+
     with col1:
 
         name = st.text_input(
             "Your Name",
-            placeholder="e.g. Tanmay"
+            placeholder="e.g. Somanshu"
         )
+
 
     with col2:
 
@@ -3864,13 +5074,10 @@ with setup_tab:
 
     if subject_names:
 
-        st.subheader(
-            "📚 Subject Information"
-        )
+        st.subheader("📚 Subject Information")
 
         st.caption(
-            "Set the exam date, difficulty and syllabus progress "
-            "for each subject."
+            "These details help calculate the priority of each subject."
         )
 
 
@@ -3883,8 +5090,8 @@ with setup_tab:
                 border=True
             ):
 
-                st.subheader(
-                    f"📖 {subject}"
+                st.markdown(
+                    f"### 📖 {subject}"
                 )
 
 
@@ -3927,7 +5134,7 @@ with setup_tab:
 
 
                 # --------------------------------------------
-                # PRIORITY
+                # CALCULATE PRIORITY
                 # --------------------------------------------
 
                 priority_info = calculate_priority(
@@ -3973,10 +5180,14 @@ with setup_tab:
                 })
 
 
-                priority_col1, priority_col2 = st.columns(2)
+                # --------------------------------------------
+                # PRIORITY DISPLAY
+                # --------------------------------------------
+
+                p1, p2 = st.columns(2)
 
 
-                with priority_col1:
+                with p1:
 
                     st.metric(
                         "Priority Score",
@@ -3984,7 +5195,7 @@ with setup_tab:
                     )
 
 
-                with priority_col2:
+                with p2:
 
                     st.metric(
                         "Priority",
@@ -3992,18 +5203,21 @@ with setup_tab:
                     )
 
 
-    # --------------------------------------------------------
+                st.progress(
+                    priority_info["score"] / 100
+                )
+
+
+    # ========================================================
     # STUDY WINDOW
-    # --------------------------------------------------------
+    # ========================================================
 
     st.divider()
 
-    st.header(
-        "⏰ Choose Your Study Window"
-    )
+    st.header("⏰ Your Study Window")
 
-    st.write(
-        "Select exactly when you are available today."
+    st.caption(
+        "Choose exactly when you are available to study."
     )
 
 
@@ -4029,7 +5243,6 @@ with setup_tab:
     start_minutes = (
 
         start_time.hour * 60
-
         + start_time.minute
 
     )
@@ -4038,7 +5251,6 @@ with setup_tab:
     end_minutes = (
 
         end_time.hour * 60
-
         + end_time.minute
 
     )
@@ -4049,7 +5261,6 @@ with setup_tab:
         available_minutes = (
 
             end_minutes
-
             - start_minutes
 
         )
@@ -4064,8 +5275,8 @@ with setup_tab:
 
         st.success(
 
-            f"⏱️ Available study time: "
-            f"**{available_hours:.1f} hours**"
+            f"⏱️ You have **{available_hours:.1f} hours** "
+            "available for studying."
 
         )
 
@@ -4074,15 +5285,14 @@ with setup_tab:
 
         available_minutes = 0
 
-
         st.error(
             "⚠️ End time must be after start time."
         )
 
 
-    # --------------------------------------------------------
-    # GENERATE BUTTON
-    # --------------------------------------------------------
+    # ========================================================
+    # GENERATE PLAN
+    # ========================================================
 
     st.write("")
 
@@ -4174,7 +5384,7 @@ with setup_tab:
 
 
             # --------------------------------------------
-            # CLEAR OLD DATA
+            # RESET OLD RESCHEDULED PLAN
             # --------------------------------------------
 
             st.session_state[
@@ -4213,7 +5423,7 @@ with plan_tab:
 
 
         # ----------------------------------------------------
-        # SUMMARY METRICS
+        # PLAN SUMMARY
         # ----------------------------------------------------
 
         available_hours = (
@@ -4251,6 +5461,7 @@ with plan_tab:
         with col3:
 
             st.metric(
+
                 "🕐 Study Window",
 
                 (
@@ -4292,12 +5503,10 @@ with plan_tab:
         # GOOGLE CALENDAR
         # ----------------------------------------------------
 
-        st.header(
-            "📅 Google Calendar"
-        )
+        st.header("📅 Google Calendar")
 
         st.caption(
-            "Turn your AI-generated study plan into real calendar events."
+            "Add your generated study sessions directly to your calendar."
         )
 
 
@@ -4334,7 +5543,7 @@ with plan_tab:
                 st.success(
 
                     f"✅ Added {len(events)} "
-                    f"study sessions to Google Calendar!"
+                    "study sessions to Google Calendar!"
 
                 )
 
@@ -4347,9 +5556,8 @@ with plan_tab:
 
 
         st.info(
-            "💡 Your AI plan uses exam urgency, "
-            "difficulty and remaining syllabus to "
-            "decide what deserves more study time."
+            "💡 Your plan is based on exam urgency, "
+            "difficulty and remaining syllabus."
         )
 
 
@@ -4362,8 +5570,7 @@ with priority_tab:
     if not st.session_state["subject_data"]:
 
         st.info(
-            "Generate a study plan first to see "
-            "your priority analysis."
+            "Generate a study plan first to see your priority analysis."
         )
 
     else:
@@ -4373,15 +5580,19 @@ with priority_tab:
         )
 
 
-        st.write(
-            "The assistant calculates subject priority using:"
+        st.caption(
+            "The assistant uses three factors to decide which subjects need more attention."
         )
 
 
-        formula_col1, formula_col2, formula_col3 = st.columns(3)
+        # ----------------------------------------------------
+        # FORMULA
+        # ----------------------------------------------------
+
+        c1, c2, c3 = st.columns(3)
 
 
-        with formula_col1:
+        with c1:
 
             st.metric(
                 "📅 Exam Urgency",
@@ -4389,7 +5600,7 @@ with priority_tab:
             )
 
 
-        with formula_col2:
+        with c2:
 
             st.metric(
                 "🎯 Difficulty",
@@ -4397,7 +5608,7 @@ with priority_tab:
             )
 
 
-        with formula_col3:
+        with c3:
 
             st.metric(
                 "📚 Remaining Syllabus",
@@ -4426,7 +5637,7 @@ with priority_tab:
 
 
         # ----------------------------------------------------
-        # PRIORITY CARDS
+        # SUBJECT CARDS
         # ----------------------------------------------------
 
         number_of_columns = min(
@@ -4456,13 +5667,20 @@ with priority_tab:
                         f"📚 {item['subject']}"
                     )
 
+
                     st.metric(
                         "Priority Score",
                         f"{item['score']}/100"
                     )
 
+
                     st.write(
                         f"**{item['priority']} Priority**"
+                    )
+
+
+                    st.progress(
+                        item["score"] / 100
                     )
 
 
@@ -4470,7 +5688,7 @@ with priority_tab:
 
 
         # ----------------------------------------------------
-        # DETAILED ANALYSIS
+        # DETAILED BREAKDOWN
         # ----------------------------------------------------
 
         st.subheader(
@@ -4508,6 +5726,10 @@ with priority_tab:
                         f"{item['progress']}%"
                     )
 
+                    st.progress(
+                        item["progress"] / 100
+                    )
+
 
                 with col2:
 
@@ -4528,8 +5750,8 @@ with priority_tab:
 
 
         st.success(
-            "💡 Higher priority subjects receive "
-            "more attention when study time is limited."
+            "💡 Higher-priority subjects receive more attention "
+            "when your study time is limited."
         )
 
 
@@ -4553,9 +5775,8 @@ with ai_tab:
         )
 
 
-        st.write(
-            "Something changed? Tell the AI naturally "
-            "and it will adapt your study plan."
+        st.caption(
+            "Tell the AI what changed and it will adapt your plan."
         )
 
 
@@ -4568,26 +5789,27 @@ with ai_tab:
         ):
 
             st.subheader(
-                "💬 Try saying..."
+                "💬 Example requests"
+            )
+
+
+            st.write(
+                "⏱️ **I only have 2 hours today.**"
             )
 
             st.write(
-                "• I only have 2 hours today."
+                "🚨 **I have my DSA exam tomorrow "
+                "and only 3 hours to study.**"
             )
 
             st.write(
-                "• I have my DSA exam tomorrow "
-                "and only 3 hours to study."
+                "📚 **My DSA paper is the next morning "
+                "and I've got 2 hours.**"
             )
 
             st.write(
-                "• My DSA paper is the next morning "
-                "and I've got 2 hours."
-            )
-
-            st.write(
-                "• I have a DSA test in 2 days "
-                "and 4 hours available."
+                "📅 **I have a DSA test in 2 days "
+                "and 4 hours available.**"
             )
 
 
@@ -4623,16 +5845,18 @@ with ai_tab:
         if user_message:
 
             # -----------------------------------------------
-            # USER MESSAGE
+            # SAVE USER MESSAGE
             # -----------------------------------------------
 
             st.session_state[
                 "chat_history"
             ].append({
 
-                "role": "user",
+                "role":
+                    "user",
 
-                "content": user_message
+                "content":
+                    user_message
 
             })
 
@@ -4679,7 +5903,7 @@ with ai_tab:
 
 
             # -----------------------------------------------
-            # SAVE
+            # SAVE NEW PLAN
             # -----------------------------------------------
 
             st.session_state[
@@ -4691,7 +5915,8 @@ with ai_tab:
                 "chat_history"
             ].append({
 
-                "role": "assistant",
+                "role":
+                    "assistant",
 
                 "content":
                     "✅ I've adapted your study plan."
@@ -4703,7 +5928,7 @@ with ai_tab:
 
 
         # ----------------------------------------------------
-        # RESCHEDULED PLAN
+        # UPDATED PLAN
         # ----------------------------------------------------
 
         if st.session_state[
@@ -4736,22 +5961,24 @@ with ai_tab:
 
 
 # ============================================================
-# DASHBOARD
+# DETAILED DASHBOARD
 # ============================================================
 
 if st.session_state["subject_data"]:
 
     st.divider()
 
+
     with st.expander(
-        "📊 Open Detailed Dashboard",
-        expanded=False
+        "📊 Open Detailed Dashboard"
     ):
 
         show_dashboard(
+
             st.session_state[
                 "subject_data"
             ]
+
         )
 
 
@@ -4762,7 +5989,7 @@ if st.session_state["subject_data"]:
 st.divider()
 
 st.caption(
-    "📚 AI Study Assistant • "
-    "Built with Streamlit + Hugging Face • "
+    "📚 AI Study Assistant  •  "
+    "Built with Streamlit + Hugging Face  •  "
     "Adaptive AI Study Planning"
 )
