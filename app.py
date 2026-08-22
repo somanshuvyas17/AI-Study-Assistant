@@ -4891,7 +4891,7 @@ if "rescheduled_plan" not in st.session_state:
 st.title("📚 AI Study Assistant")
 
 st.caption(
-    "Your personal AI-powered adaptive study planner"
+    "YOUR PERSONAL AI-POWERED ADAPTIVE STUDY PLANNER"
 )
 
 st.write(
@@ -5041,7 +5041,7 @@ with setup_tab:
 
         name = st.text_input(
             "Your Name",
-            placeholder="e.g. Somanshu"
+            placeholder="Enter your name"
         )
 
 
@@ -5049,7 +5049,7 @@ with setup_tab:
 
         subjects_input = st.text_input(
             "Subjects",
-            placeholder="DSA, Java, Maths"
+            placeholder="Enter your subjects"
         )
 
 
