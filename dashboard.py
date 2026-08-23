@@ -1,5 +1,3 @@
-
-
 import streamlit as st
 
 from priority import calculate_priority
